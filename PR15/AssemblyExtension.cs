@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PR15  // ← ВАЖНО: Должен совпадать с namespace сгенерированных классов!
+namespace PR15
 {
     public partial class assembly_
     {

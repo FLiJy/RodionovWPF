@@ -8,13 +8,15 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Grid.Column="0" Header="📦 Компоненты" Margin="0,0,10,0">
+        <!-- Список компонентов -->
+        <GroupBox Grid.Column="0" Header="Компоненты" Margin="0,0,10,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!-- Фильтры -->
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
                     <TextBox x:Name="TxtSearch" Width="200" Margin="0,0,10,0" 
                              TextChanged="TxtSearch_TextChanged"/>
@@ -26,19 +28,30 @@
                               SelectionChanged="CboManufacturer_SelectionChanged"/>
                 </StackPanel>
 
+                <!-- Таблица компонентов -->
                 <DataGrid Grid.Row="1" x:Name="DgParts" AutoGenerateColumns="False" 
                           IsReadOnly="True" SelectionChanged="DgParts_SelectionChanged"
                           CanUserAddRows="False" HeadersVisibility="Column">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Название" Binding="{Binding DisplayName}" Width="*"/>
-                        <DataGridTextColumn Header="Тип" Binding="{Binding TypeName}" Width="100"/>
-                        <DataGridTextColumn Header="Цена" Binding="{Binding PriceFormatted}" Width="100"/>
+                        <DataGridTemplateColumn Header="Фото" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding image}" 
+                                           Width="60" Height="60" 
+                                           Stretch="Uniform"
+                                           Margin="5"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="*"/>
+                        <DataGridTextColumn Header="Производитель" Binding="{Binding manufacturer.name}" Width="120"/>
+                        <DataGridTextColumn Header="Цена" Binding="{Binding price, StringFormat={}{0:N0} ₽}" Width="100"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Column="1" Header="🖥️ Ваша сборка">
+        <GroupBox Grid.Column="1" Header="Ваша сборка">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -47,8 +60,10 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
+                <!-- Список выбранных компонентов -->
                 <ListBox x:Name="LbAssembly" Grid.Row="0" Margin="0,0,0,10"
-                         DisplayMemberPath="DisplayName">
+                         DisplayMemberPath="name"
+                         SelectionChanged="LbAssembly_SelectionChanged">
                     <ListBox.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Удалить" Click="MenuItem_Remove_Click"/>
@@ -56,23 +71,29 @@
                     </ListBox.ContextMenu>
                 </ListBox>
 
-                <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                <GroupBox Grid.Row="1" Header="Характеристики" Margin="0,0,0,10">
+                    <ScrollViewer MaxHeight="200" VerticalScrollBarVisibility="Auto">
+                        <TextBlock x:Name="TxtSpecs" TextWrapping="Wrap" Text="Выберите компонент"/>
+                    </ScrollViewer>
+                </GroupBox>
+
+                <StackPanel Grid.Row="2" Margin="0,0,0,10">
                     <TextBlock x:Name="TxtTotalPrice" FontWeight="Bold" FontSize="16" 
                                Text="Итого: 0 ₽"/>
                 </StackPanel>
 
-                <TextBlock x:Name="TxtErrors" Grid.Row="2" Foreground="#E74C3C" 
+                <TextBlock x:Name="TxtErrors" Grid.Row="3" Foreground="#E74C3C" 
                            TextWrapping="Wrap" Margin="0,0,0,10"
                            FontWeight="Bold"/>
 
-                <StackPanel Grid.Row="3" Orientation="Vertical">
-                    <Button Content="💾 Сохранить сборку" Click="BtnSave_Click" 
+                <StackPanel Grid.Row="4" Orientation="Vertical">
+                    <Button Content="Сохранить сборку" Click="BtnSave_Click" 
                             Padding="10,8" Margin="0,0,0,5"
-                            Background="#27AE60" Foreground="White"
+                            Background="#74C365" Foreground="White"
                             BorderThickness="0"/>
-                    <Button Content="🗑️ Очистить сборку" Click="BtnClear_Click" 
+                    <Button Content="Очистить сборку" Click="BtnClear_Click" 
                             Padding="10,8"
-                            Background="#E74C3C" Foreground="White"
+                            Background="RED" Foreground="White"
                             BorderThickness="0"/>
                 </StackPanel>
             </Grid>

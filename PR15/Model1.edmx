@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище PR15Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище PR15RodionovModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="assembly$">
           <Key>
             <PropertyRef Name="id" />
@@ -232,16 +232,6 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="videoconnector$">
           <Key>
@@ -654,7 +644,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище PR15ModelContainer">
+        <EntityContainer Name="Хранилище PR15RodionovModelContainer">
           <EntitySet Name="assembly$" EntityType="Self.assembly$" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="basepart$" EntityType="Self.basepart$" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="boardformfactorcase$" EntityType="Self.boardformfactorcase$" Schema="dbo" store:Type="Tables" />
@@ -682,7 +672,6 @@
           <EntitySet Name="storagedevice$" EntityType="Self.storagedevice$" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="storagedeviceinterface$" EntityType="Self.storagedeviceinterface$" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="storagedevicetype$" EntityType="Self.storagedevicetype$" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="videoconnector$" EntityType="Self.videoconnector$" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="videoconnectorgpu$" EntityType="Self.videoconnectorgpu$" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_basepart$_manufacturer$" Association="Self.FK_basepart$_manufacturer$">
@@ -822,7 +811,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="PR15Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PR15RodionovModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="assembly_">
           <Key>
             <PropertyRef Name="id" />
@@ -1113,16 +1102,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="storagedevice_" Relationship="Self.FK_storagedevice__storagedevicetype_" FromRole="storagedevicetype_" ToRole="storagedevice_" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="videoconnector_">
           <Key>
@@ -1538,7 +1517,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PRAC15Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PR15Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="assembly_" EntityType="Self.assembly_" />
           <EntitySet Name="basepart_" EntityType="Self.basepart_" />
           <EntitySet Name="boardformfactorcase_" EntityType="Self.boardformfactorcase_" />
@@ -1566,7 +1545,6 @@
           <EntitySet Name="storagedevice_" EntityType="Self.storagedevice_" />
           <EntitySet Name="storagedeviceinterface_" EntityType="Self.storagedeviceinterface_" />
           <EntitySet Name="storagedevicetype_" EntityType="Self.storagedevicetype_" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="videoconnector_" EntityType="Self.videoconnector_" />
           <EntitySet Name="videoconnectorgpu_" EntityType="Self.videoconnectorgpu_" />
           <AssociationSet Name="FK_partassembly__assembly_" Association="Self.FK_partassembly__assembly_">
@@ -1707,9 +1685,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище PR15ModelContainer" CdmEntityContainer="PRAC15Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PR15RodionovModelContainer" CdmEntityContainer="PR15Entities">
           <EntitySetMapping Name="assembly_">
-            <EntityTypeMapping TypeName="PR15Model.assembly_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.assembly_">
               <MappingFragment StoreEntitySet="assembly$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1718,7 +1696,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="basepart_">
-            <EntityTypeMapping TypeName="PR15Model.basepart_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.basepart_">
               <MappingFragment StoreEntitySet="basepart$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1730,7 +1708,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="boardformfactorcase_">
-            <EntityTypeMapping TypeName="PR15Model.boardformfactorcase_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.boardformfactorcase_">
               <MappingFragment StoreEntitySet="boardformfactorcase$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="caseid" ColumnName="caseid" />
@@ -1739,7 +1717,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="case_">
-            <EntityTypeMapping TypeName="PR15Model.case_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.case_">
               <MappingFragment StoreEntitySet="case$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="sizeid" ColumnName="sizeid" />
@@ -1749,7 +1727,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="casesize_">
-            <EntityTypeMapping TypeName="PR15Model.casesize_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.casesize_">
               <MappingFragment StoreEntitySet="casesize$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1757,7 +1735,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="certificate_">
-            <EntityTypeMapping TypeName="PR15Model.certificate_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.certificate_">
               <MappingFragment StoreEntitySet="certificate$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1765,7 +1743,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="cpu_">
-            <EntityTypeMapping TypeName="PR15Model.cpu_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.cpu_">
               <MappingFragment StoreEntitySet="cpu$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="socketid" ColumnName="socketid" />
@@ -1780,7 +1758,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="fandimension_">
-            <EntityTypeMapping TypeName="PR15Model.fandimension_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.fandimension_">
               <MappingFragment StoreEntitySet="fandimension$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1788,7 +1766,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="formfactor_">
-            <EntityTypeMapping TypeName="PR15Model.formfactor_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.formfactor_">
               <MappingFragment StoreEntitySet="formfactor$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1796,7 +1774,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="gpu_">
-            <EntityTypeMapping TypeName="PR15Model.gpu_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.gpu_">
               <MappingFragment StoreEntitySet="gpu$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="gpuinterfaceid" ColumnName="gpuinterfaceid" />
@@ -1808,7 +1786,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="gpuinterface_">
-            <EntityTypeMapping TypeName="PR15Model.gpuinterface_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.gpuinterface_">
               <MappingFragment StoreEntitySet="gpuinterface$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1816,7 +1794,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="hdd_">
-            <EntityTypeMapping TypeName="PR15Model.hdd_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.hdd_">
               <MappingFragment StoreEntitySet="hdd$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="rotationspeed" ColumnName="rotationspeed" />
@@ -1824,7 +1802,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="igpu_">
-            <EntityTypeMapping TypeName="PR15Model.igpu_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.igpu_">
               <MappingFragment StoreEntitySet="igpu$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1832,7 +1810,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="manufacturer_">
-            <EntityTypeMapping TypeName="PR15Model.manufacturer_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.manufacturer_">
               <MappingFragment StoreEntitySet="manufacturer$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1840,7 +1818,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="memorytype_">
-            <EntityTypeMapping TypeName="PR15Model.memorytype_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.memorytype_">
               <MappingFragment StoreEntitySet="memorytype$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1848,7 +1826,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="motherboard_">
-            <EntityTypeMapping TypeName="PR15Model.motherboard_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.motherboard_">
               <MappingFragment StoreEntitySet="motherboard$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="socketid" ColumnName="socketid" />
@@ -1862,7 +1840,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="partassembly_">
-            <EntityTypeMapping TypeName="PR15Model.partassembly_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.partassembly_">
               <MappingFragment StoreEntitySet="partassembly$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="partid" ColumnName="partid" />
@@ -1871,7 +1849,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="parttype_">
-            <EntityTypeMapping TypeName="PR15Model.parttype_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.parttype_">
               <MappingFragment StoreEntitySet="parttype$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1879,7 +1857,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="powersupply_">
-            <EntityTypeMapping TypeName="PR15Model.powersupply_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.powersupply_">
               <MappingFragment StoreEntitySet="powersupply$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="power" ColumnName="power" />
@@ -1889,7 +1867,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="processorcooler_">
-            <EntityTypeMapping TypeName="PR15Model.processorcooler_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.processorcooler_">
               <MappingFragment StoreEntitySet="processorcooler$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="fandimensionid" ColumnName="fandimensionid" />
@@ -1901,7 +1879,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ram_">
-            <EntityTypeMapping TypeName="PR15Model.ram_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.ram_">
               <MappingFragment StoreEntitySet="ram$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="memorytypeid" ColumnName="memorytypeid" />
@@ -1913,7 +1891,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="socket_">
-            <EntityTypeMapping TypeName="PR15Model.socket_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.socket_">
               <MappingFragment StoreEntitySet="socket$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1921,7 +1899,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="socketprocessorcooler_">
-            <EntityTypeMapping TypeName="PR15Model.socketprocessorcooler_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.socketprocessorcooler_">
               <MappingFragment StoreEntitySet="socketprocessorcooler$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="socketid" ColumnName="socketid" />
@@ -1930,7 +1908,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ssd_">
-            <EntityTypeMapping TypeName="PR15Model.ssd_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.ssd_">
               <MappingFragment StoreEntitySet="ssd$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tbw" ColumnName="tbw" />
@@ -1938,7 +1916,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="storagedevice_">
-            <EntityTypeMapping TypeName="PR15Model.storagedevice_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.storagedevice_">
               <MappingFragment StoreEntitySet="storagedevice$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="capacity" ColumnName="capacity" />
@@ -1948,7 +1926,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="storagedeviceinterface_">
-            <EntityTypeMapping TypeName="PR15Model.storagedeviceinterface_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.storagedeviceinterface_">
               <MappingFragment StoreEntitySet="storagedeviceinterface$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1956,26 +1934,15 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="storagedevicetype_">
-            <EntityTypeMapping TypeName="PR15Model.storagedevicetype_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.storagedevicetype_">
               <MappingFragment StoreEntitySet="storagedevicetype$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PR15Model.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="videoconnector_">
-            <EntityTypeMapping TypeName="PR15Model.videoconnector_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.videoconnector_">
               <MappingFragment StoreEntitySet="videoconnector$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1983,7 +1950,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="videoconnectorgpu_">
-            <EntityTypeMapping TypeName="PR15Model.videoconnectorgpu_">
+            <EntityTypeMapping TypeName="PR15RodionovModel.videoconnectorgpu_">
               <MappingFragment StoreEntitySet="videoconnectorgpu$">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="gpuid" ColumnName="gpuid" />

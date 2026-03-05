@@ -9,18 +9,19 @@ namespace PR15
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Content = new BuilderPage();
+            // Загружаем первую страницу
+            MainFrame.Navigate(new BuilderPage());
         }
 
         private void BtnBuilder_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new BuilderPage();
+            MainFrame.Navigate(new BuilderPage());
             StatusText.Text = "Режим конфигуратора";
         }
 
         private void BtnAssemblies_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new AssembliesPage();
+            MainFrame.Navigate(new AssembliesPage());
             StatusText.Text = "Просмотр сохранённых сборок";
         }
     }

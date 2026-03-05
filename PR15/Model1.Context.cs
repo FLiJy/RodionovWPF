@@ -13,10 +13,10 @@ namespace PR15
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PRAC15Entities : DbContext
+    public partial class PR15Entities : DbContext
     {
-        public PRAC15Entities()
-            : base("name=PRAC15Entities")
+        public PR15Entities()
+            : base("name=PR15Entities")
         {
         }
     
@@ -52,7 +52,6 @@ namespace PR15
         public virtual DbSet<storagedevice_> storagedevice_ { get; set; }
         public virtual DbSet<storagedeviceinterface_> storagedeviceinterface_ { get; set; }
         public virtual DbSet<storagedevicetype_> storagedevicetype_ { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<videoconnector_> videoconnector_ { get; set; }
         public virtual DbSet<videoconnectorgpu_> videoconnectorgpu_ { get; set; }
     }

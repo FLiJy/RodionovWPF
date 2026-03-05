@@ -8,6 +8,6 @@ namespace PR15
 {
     class Core
     {
-        public static PRAC15Entities Context => new PRAC15Entities();
+        public static PR15Entities Context => new PR15Entities();
     }
 }

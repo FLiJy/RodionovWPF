@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using PR15.Models;
+using PR15;
 
 namespace PR15.Pages
 {
