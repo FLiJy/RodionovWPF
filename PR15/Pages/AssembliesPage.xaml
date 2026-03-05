@@ -1,0 +1,44 @@
+﻿<Page x:Class="PR15.Pages.AssembliesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Сохранённые сборки">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="📁 Сохранённые сборки" 
+                   FontSize="24" FontWeight="Bold" Margin="0,0,0,15"/>
+
+        <DataGrid Grid.Row="1" x:Name="DgAssemblies" AutoGenerateColumns="False" 
+                  IsReadOnly="True" SelectionChanged="DgAssemblies_SelectionChanged"
+                  CanUserAddRows="False" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="*"/>
+                <DataGridTextColumn Header="Автор" Binding="{Binding author}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <GroupBox Grid.Row="2" Header="📋 Детали сборки" Margin="0,15,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ListBox x:Name="LbAssemblyParts" Grid.Row="0" Height="150" 
+                         Margin="0,0,0,10"/>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock x:Name="TxtAssemblyTotal" FontWeight="Bold" FontSize="16" 
+                               Margin="0,0,20,0"/>
+                    <Button Content="🗑️ Удалить сборку" Click="BtnDelete_Click" 
+                            Padding="15,8" Background="#E74C3C" Foreground="White"
+                            BorderThickness="0"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Page>

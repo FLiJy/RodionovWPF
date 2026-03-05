@@ -1,0 +1,81 @@
+﻿<Page x:Class="PR15.Pages.BuilderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Конфигуратор">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Column="0" Header="📦 Компоненты" Margin="0,0,10,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBox x:Name="TxtSearch" Width="200" Margin="0,0,10,0" 
+                             TextChanged="TxtSearch_TextChanged"/>
+                    <ComboBox x:Name="CboType" Width="150" Margin="0,0,10,0" 
+                              DisplayMemberPath="name"
+                              SelectionChanged="CboType_SelectionChanged"/>
+                    <ComboBox x:Name="CboManufacturer" Width="150" 
+                              DisplayMemberPath="name"
+                              SelectionChanged="CboManufacturer_SelectionChanged"/>
+                </StackPanel>
+
+                <DataGrid Grid.Row="1" x:Name="DgParts" AutoGenerateColumns="False" 
+                          IsReadOnly="True" SelectionChanged="DgParts_SelectionChanged"
+                          CanUserAddRows="False" HeadersVisibility="Column">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название" Binding="{Binding DisplayName}" Width="*"/>
+                        <DataGridTextColumn Header="Тип" Binding="{Binding TypeName}" Width="100"/>
+                        <DataGridTextColumn Header="Цена" Binding="{Binding PriceFormatted}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Column="1" Header="🖥️ Ваша сборка">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ListBox x:Name="LbAssembly" Grid.Row="0" Margin="0,0,0,10"
+                         DisplayMemberPath="DisplayName">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Удалить" Click="MenuItem_Remove_Click"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
+
+                <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                    <TextBlock x:Name="TxtTotalPrice" FontWeight="Bold" FontSize="16" 
+                               Text="Итого: 0 ₽"/>
+                </StackPanel>
+
+                <TextBlock x:Name="TxtErrors" Grid.Row="2" Foreground="#E74C3C" 
+                           TextWrapping="Wrap" Margin="0,0,0,10"
+                           FontWeight="Bold"/>
+
+                <StackPanel Grid.Row="3" Orientation="Vertical">
+                    <Button Content="💾 Сохранить сборку" Click="BtnSave_Click" 
+                            Padding="10,8" Margin="0,0,0,5"
+                            Background="#27AE60" Foreground="White"
+                            BorderThickness="0"/>
+                    <Button Content="🗑️ Очистить сборку" Click="BtnClear_Click" 
+                            Padding="10,8"
+                            Background="#E74C3C" Foreground="White"
+                            BorderThickness="0"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Page>
