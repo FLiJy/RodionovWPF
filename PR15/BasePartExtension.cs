@@ -12,5 +12,6 @@ namespace PR15 {
         public string PriceFormatted => $"{price:N0} ₽";
 
         public string TypeName => parttype_?.name ?? "Другое";
+        //public string Description { get; set; }
     }
 }
