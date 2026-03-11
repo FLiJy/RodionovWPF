@@ -12,7 +12,6 @@ namespace PR15.Services
             var errors = new List<string>();
             using (var context = Core.Context)
             {
-                // Типы частей: 1=CPU, 2=GPU, 3=RAM, 4=Motherboard, 5=Case, 6=PSU, 7=Cooler, 8=Storage
                 var cpu = selectedParts.FirstOrDefault(p => p.parttypeid == 1);
                 var motherboard = selectedParts.FirstOrDefault(p => p.parttypeid == 4);
                 var ram = selectedParts.Where(p => p.parttypeid == 3).ToList();
@@ -21,17 +20,15 @@ namespace PR15.Services
                 var cooler = selectedParts.FirstOrDefault(p => p.parttypeid == 7);
                 var casePart = selectedParts.FirstOrDefault(p => p.parttypeid == 5);
 
-                // 1. Совместимость сокета (CPU и Материнская плата)
                 if (cpu != null && motherboard != null)
                 {
                     var cpuSocket = context.cpu_.FirstOrDefault(c => c.id == cpu.id)?.socketid;
                     var mbSocket = context.motherboard_.FirstOrDefault(m => m.id == motherboard.id)?.socketid;
 
                     if (cpuSocket.HasValue && mbSocket.HasValue && cpuSocket != mbSocket)
-                        errors.Add("❌ Процессор и материнская плата имеют разные сокеты!");
+                        errors.Add("Процессор и материнская плата имеют разные сокеты");
                 }
 
-                // 2. Совместимость сокета (CPU и Кулер)
                 if (cpu != null && cooler != null)
                 {
                     var cpuSocket = context.cpu_.FirstOrDefault(c => c.id == cpu.id)?.socketid;
@@ -41,11 +38,10 @@ namespace PR15.Services
                             spc.socketid == cpuSocket && spc.processorcoolerid == cooler.id);
 
                         if (!isCompatible)
-                            errors.Add("❌ Кулер не совместим с сокетом процессора!");
+                            errors.Add("Кулер не совместим с сокетом процессора");
                     }
                 }
 
-                // 3. Совместимость форм-фактора (Материнская плата и Корпус)
                 if (motherboard != null && casePart != null)
                 {
                     var mbFormFactor = context.motherboard_.FirstOrDefault(m => m.id == motherboard.id)?.formfactorid;
@@ -55,11 +51,10 @@ namespace PR15.Services
                             bfc.caseid == casePart.id && bfc.formfactorid == mbFormFactor);
 
                         if (!isCompatible)
-                            errors.Add("❌ Материнская плата не подходит к корпусу по форм-фактору!");
+                            errors.Add("Материнская плата не подходит к корпусу по форм-фактору!");
                     }
                 }
 
-                // 4. Совместимость памяти (Материнская плата и ОЗУ)
                 if (motherboard != null && ram.Any())
                 {
                     var mbMemoryType = context.motherboard_.FirstOrDefault(m => m.id == motherboard.id)?.memorytypeid;
@@ -69,12 +64,11 @@ namespace PR15.Services
                         {
                             var ramMemoryType = context.ram_.FirstOrDefault(rm => rm.id == r.id)?.memorytypeid;
                             if (ramMemoryType.HasValue && ramMemoryType != mbMemoryType)
-                                errors.Add($"❌ Оперативная память '{r.name}' не совместима с материнской платой!");
+                                errors.Add($"Оперативная память '{r.name}' не совместима с материнской платой");
                         }
                     }
                 }
 
-                // 5. Мощность БП и Видеокарты
                 if (psu != null && gpu.Any())
                 {
                     var psuPower = context.powersupply_.FirstOrDefault(p => p.id == psu.id)?.power;
@@ -89,7 +83,7 @@ namespace PR15.Services
                         }
 
                         if (psuPower < totalGpuPower)
-                            errors.Add($"❌ Блок питания ({psuPower}W) слабее рекомендованного для видеокарт ({totalGpuPower}W)!");
+                            errors.Add($"Блок питания ({psuPower}W) слабее рекомендованного для видеокарт ({totalGpuPower}W)(он взорвется)");
                     }
                 }
             }

@@ -1,4 +1,4 @@
-﻿<!--<Page x:Class="PR15.Pages.BuilderPage"
+﻿    <Page x:Class="PR15.Pages.BuilderPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Конфигуратор">
@@ -8,110 +8,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        --><!-- Список компонентов --><!--
         <GroupBox Grid.Column="0" Header="Компоненты" Margin="0,0,10,0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                --><!-- Фильтры --><!--
-                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBox x:Name="TxtSearch" Width="200" Margin="0,0,10,0" 
-                             TextChanged="TxtSearch_TextChanged"/>
-                    <ComboBox x:Name="CboType" Width="150" Margin="0,0,10,0" 
-                              DisplayMemberPath="name"
-                              SelectionChanged="CboType_SelectionChanged"/>
-                    <ComboBox x:Name="CboManufacturer" Width="150" 
-                              DisplayMemberPath="name"
-                              SelectionChanged="CboManufacturer_SelectionChanged"/>
-                </StackPanel>
-
-                --><!-- Таблица компонентов --><!--
-                <DataGrid Grid.Row="1" x:Name="DgParts" AutoGenerateColumns="False" 
-                          IsReadOnly="True" SelectionChanged="DgParts_SelectionChanged"
-                          CanUserAddRows="False" HeadersVisibility="Column">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Фото" Width="80">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding image}" 
-                                           Width="60" Height="60" 
-                                           Stretch="Uniform"
-                                           Margin="5"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="*"/>
-                        <DataGridTextColumn Header="Производитель" Binding="{Binding manufacturer.name}" Width="120"/>
-                        <DataGridTextColumn Header="Цена" Binding="{Binding price, StringFormat={}{0:N0} ₽}" Width="100"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </GroupBox>
-
-        <GroupBox Grid.Column="1" Header="Ваша сборка">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                --><!-- Список выбранных компонентов --><!--
-                <ListBox x:Name="LbAssembly" Grid.Row="0" Margin="0,0,0,10"
-                         DisplayMemberPath="name"
-                         SelectionChanged="LbAssembly_SelectionChanged">
-                    <ListBox.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Удалить" Click="MenuItem_Remove_Click"/>
-                        </ContextMenu>
-                    </ListBox.ContextMenu>
-                </ListBox>
-
-                <GroupBox Grid.Row="1" Header="Характеристики" Margin="0,0,0,10">
-                    <ScrollViewer MaxHeight="200" VerticalScrollBarVisibility="Auto">
-                        <TextBlock x:Name="TxtSpecs" TextWrapping="Wrap" Text="Выберите компонент"/>
-                    </ScrollViewer>
-                </GroupBox>
-
-                <StackPanel Grid.Row="2" Margin="0,0,0,10">
-                    <TextBlock x:Name="TxtTotalPrice" FontWeight="Bold" FontSize="16" 
-                               Text="Итого: 0 ₽"/>
-                </StackPanel>
-
-                <TextBlock x:Name="TxtErrors" Grid.Row="3" Foreground="#E74C3C" 
-                           TextWrapping="Wrap" Margin="0,0,0,10"
-                           FontWeight="Bold"/>
-
-                <StackPanel Grid.Row="4" Orientation="Vertical">
-                    <Button Content="Сохранить сборку" Click="BtnSave_Click" 
-                            Padding="10,8" Margin="0,0,0,5"
-                            Background="#74C365" Foreground="White"
-                            BorderThickness="0"/>
-                    <Button Content="Очистить сборку" Click="BtnClear_Click" 
-                            Padding="10,8"
-                            Background="RED" Foreground="White"
-                            BorderThickness="0"/>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
-    </Grid>
-</Page>-->
-
-<Page x:Class="PR15.Pages.BuilderPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Конфигуратор">
-    <Grid Margin="15">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <GroupBox Grid.Column="0" Header="📦 Компоненты" Margin="0,0,10,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -145,14 +42,14 @@
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="*"/>
                         <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="250"/>
-                        <DataGridTextColumn Header="Производитель" Binding="{Binding manufacturer.name}" Width="120"/>
+                        <DataGridTextColumn Header="Производитель" Binding="{Binding manufacturer_.name}" Width="120"/>
                         <DataGridTextColumn Header="Цена" Binding="{Binding price, StringFormat={}{0:N0} ₽}" Width="100"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Column="1" Header="🖥️ Ваша сборка">
+        <GroupBox Grid.Column="1" Header="Ваша сборка">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -171,7 +68,7 @@
                     </ListBox.ContextMenu>
                 </ListBox>
 
-                <GroupBox Grid.Row="1" Header="📋 Характеристики" Margin="0,0,0,10">
+                <GroupBox Grid.Row="1" Header="Характеристики" Margin="0,0,0,10">
                     <ScrollViewer MaxHeight="200" VerticalScrollBarVisibility="Auto">
                         <TextBlock x:Name="TxtSpecs" TextWrapping="Wrap" Text="Выберите компонент"/>
                     </ScrollViewer>
@@ -187,11 +84,11 @@
                            FontWeight="Bold"/>
 
                 <StackPanel Grid.Row="4" Orientation="Vertical">
-                    <Button Content="💾 Сохранить сборку" Click="BtnSave_Click" 
+                    <Button Content="Сохранить сборку" Click="BtnSave_Click" 
                             Padding="10,8" Margin="0,0,0,5"
                             Background="#27AE60" Foreground="White"
                             BorderThickness="0"/>
-                    <Button Content="🗑️ Очистить сборку" Click="BtnClear_Click" 
+                    <Button Content="Очистить сборку" Click="BtnClear_Click" 
                             Padding="10,8"
                             Background="#E74C3C" Foreground="White"
                             BorderThickness="0"/>

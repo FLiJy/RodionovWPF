@@ -9,7 +9,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="📁 Сохранённые сборки" 
+        <TextBlock Grid.Row="0" Text="Сохранённые сборки" 
                    FontSize="24" FontWeight="Bold" Margin="0,0,0,15"/>
 
         <DataGrid Grid.Row="1" x:Name="DgAssemblies" AutoGenerateColumns="False" 
@@ -21,7 +21,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <GroupBox Grid.Row="2" Header="📋 Детали сборки" Margin="0,15,0,0">
+        <GroupBox Grid.Row="2" Header="Детали сборки" Margin="0,15">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -34,7 +34,7 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock x:Name="TxtAssemblyTotal" FontWeight="Bold" FontSize="16" 
                                Margin="0,0,20,0"/>
-                    <Button Content="🗑️ Удалить сборку" Click="BtnDelete_Click" 
+                    <Button Content="Удалить сборку" Click="BtnDelete_Click" 
                             Padding="15,8" Background="#E74C3C" Foreground="White"
                             BorderThickness="0"/>
                 </StackPanel>
