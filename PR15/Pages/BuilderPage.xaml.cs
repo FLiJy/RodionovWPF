@@ -1,9 +1,10 @@
-﻿using System;
+﻿using PR15.Models;
+using PR15.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using PR15.Services;
 
 namespace PR15.Pages
 {
@@ -45,14 +46,7 @@ namespace PR15.Pages
                 if (CboManufacturer.SelectedItem != null)
                     query = query.Where(p => p.manufacturerid == ((manufacturer_)CboManufacturer.SelectedItem).id);
 
-                var parts = query.ToList();
-
-                foreach (var part in parts)
-                {
-                    part.Description = basepart_.GetDescription(part, context);
-                }
-
-                DgParts.ItemsSource = parts;
+                DgParts.ItemsSource = query.ToList();
             }
         }
 
@@ -86,7 +80,7 @@ namespace PR15.Pages
 
                 switch (part.parttypeid)
                 {
-                    case 1: 
+                    case 1: // CPU
                         var cpu = context.cpu_.FirstOrDefault(c => c.id == part.id);
                         if (cpu != null)
                         {
@@ -104,7 +98,7 @@ namespace PR15.Pages
                         }
                         break;
 
-                    case 2: 
+                    case 2: // GPU
                         var gpu = context.gpu_.FirstOrDefault(g => g.id == part.id);
                         if (gpu != null)
                         {
@@ -118,7 +112,7 @@ namespace PR15.Pages
                         }
                         break;
 
-                    case 3: 
+                    case 3: // RAM
                         var ram = context.ram_.FirstOrDefault(r => r.id == part.id);
                         if (ram != null)
                         {
@@ -131,7 +125,7 @@ namespace PR15.Pages
                         }
                         break;
 
-                    case 4: 
+                    case 4: // Motherboard
                         var mb = context.motherboard_.FirstOrDefault(m => m.id == part.id);
                         if (mb != null)
                         {
@@ -149,7 +143,7 @@ namespace PR15.Pages
                         }
                         break;
 
-                    case 5: 
+                    case 5: // Case
                         var caseItem = context.case_.FirstOrDefault(c => c.id == part.id);
                         if (caseItem != null)
                         {
@@ -160,7 +154,7 @@ namespace PR15.Pages
                         }
                         break;
 
-                    case 6: 
+                    case 6: // Power Supply
                         var psu = context.powersupply_.FirstOrDefault(p => p.id == part.id);
                         if (psu != null)
                         {
@@ -173,7 +167,7 @@ namespace PR15.Pages
                         }
                         break;
 
-                    case 7: 
+                    case 7: // Processor Cooler
                         var cooler = context.processorcooler_.FirstOrDefault(c => c.id == part.id);
                         if (cooler != null)
                         {
@@ -185,7 +179,7 @@ namespace PR15.Pages
                         }
                         break;
 
-                    case 8: 
+                    case 8: // Storage Device
                         var storage = context.storagedevice_.FirstOrDefault(s => s.id == part.id);
                         if (storage != null)
                         {
@@ -196,13 +190,13 @@ namespace PR15.Pages
                             specs.Add($"Интерфейс: {storageInterface?.name ?? "N/A"}");
                             specs.Add($"Объём: {storage.capacity} ГБ");
 
-                            if (storage.storagedevicetypeid == 1) 
+                            if (storage.storagedevicetypeid == 1) // SSD
                             {
                                 var ssd = context.ssd_.FirstOrDefault(s => s.id == part.id);
                                 if (ssd != null)
                                     specs.Add($"TBW: {ssd.tbw} ТБ");
                             }
-                            else if (storage.storagedevicetypeid == 2) 
+                            else if (storage.storagedevicetypeid == 2) // HDD
                             {
                                 var hdd = context.hdd_.FirstOrDefault(h => h.id == part.id);
                                 if (hdd != null)
@@ -225,7 +219,7 @@ namespace PR15.Pages
             TxtTotalPrice.Text = $"Итого: {total:N0} ₽";
 
             var errors = CompatibilityChecker.CheckCompatibility(_currentAssembly);
-            TxtErrors.Text = errors.Any() ? string.Join("\n", errors) : "Все компоненты совместимы";
+            TxtErrors.Text = errors.Any() ? string.Join("\n", errors) : "✅ Все компоненты совместимы";
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
