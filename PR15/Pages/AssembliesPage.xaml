@@ -1,49 +1,4 @@
-﻿<!--<Page x:Class="PR15.Pages.AssembliesPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Сохранённые сборки">
-    <Grid Margin="15">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="0" Text="Сохранённые сборки" 
-                   FontSize="24" FontWeight="Bold" Margin="0,0,0,15"/>
-
-        <DataGrid Grid.Row="1" x:Name="DgAssemblies" AutoGenerateColumns="False" 
-                  IsReadOnly="True" SelectionChanged="DgAssemblies_SelectionChanged"
-                  CanUserAddRows="False" HeadersVisibility="Column">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="*"/>
-                <DataGridTextColumn Header="Автор" Binding="{Binding author}" Width="150"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <GroupBox Grid.Row="2" Header="Детали сборки" Margin="0,15">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <ListBox x:Name="LbAssemblyParts" Grid.Row="0" Height="150" 
-                         Margin="0,0,0,10"/>
-
-                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock x:Name="TxtAssemblyTotal" FontWeight="Bold" FontSize="16" 
-                               Margin="0,0,20,0"/>
-                    <Button Content="Удалить сборку" Click="BtnDelete_Click" 
-                            Padding="15,8" Background="#E74C3C" Foreground="White"
-                            BorderThickness="0"/>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
-    </Grid>
-</Page>-->
-
-<Page x:Class="PR15.Pages.AssembliesPage"
+﻿<Page x:Class="PR15.Pages.AssembliesPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Сохранённые сборки"
@@ -55,7 +10,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" 
-                   Text="📁 Сохранённые сборки" 
+                   Text="Сохранённые сборки" 
                    FontSize="32" 
                    FontWeight="Bold" 
                    Foreground="#2C3E50"
@@ -73,9 +28,7 @@
                     CornerRadius="15" 
                     Padding="20"
                     Margin="0,0,15,0">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.1"/>
-                </Border.Effect>
+         
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -83,7 +36,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" 
-                               Text="📋 Список сборок" 
+                               Text="Список сборок" 
                                FontSize="20" 
                                FontWeight="Bold" 
                                Foreground="#2C3E50"
@@ -99,7 +52,7 @@
                               BorderThickness="0">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="Background" Value="#9B59B6"/>
+                                <Setter Property="Background" Value="DarkViolet"/>
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter Property="Padding" Value="10,8"/>
                                 <Setter Property="FontWeight" Value="Bold"/>
@@ -115,13 +68,11 @@
 
             <!-- Детали сборки -->
             <Border Grid.Column="1" 
-                    Background="White" 
-                    CornerRadius="15" 
+                    Background="DarkOrange" 
+                    CornerRadius="15, 50, 50, 15" 
                     Padding="20"
                     Margin="15,0,0,0">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.1"/>
-                </Border.Effect>
+       
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -131,10 +82,10 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" 
-                               Text="🔍 Детали сборки" 
+                               Text="Детали сборки" 
                                FontSize="20" 
                                FontWeight="Bold" 
-                               Foreground="#2C3E50"
+                               Foreground="White"
                                Margin="0,0,0,15"/>
 
                     <Border Grid.Row="1" 
@@ -155,7 +106,7 @@
                     </Border>
 
                     <Border Grid.Row="2" 
-                            Background="#E8F8F5" 
+                            Background="MintCream" 
                             CornerRadius="10" 
                             Padding="15"
                             Margin="0,0,0,15">
@@ -167,10 +118,10 @@
                     </Border>
 
                     <Button Grid.Row="3" 
-                            Content="🗑️ Удалить сборку" 
+                            Content="Удалить сборку" 
                             Click="BtnDelete_Click" 
                             Padding="15,12"
-                            Background="#E74C3C" 
+                            Background="Red" 
                             Foreground="White"
                             BorderThickness="0"
                             FontSize="14"
@@ -181,7 +132,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border Background="{TemplateBinding Background}" 
-                                                    CornerRadius="8" 
+                                                    CornerRadius="220" 
                                                     Padding="{TemplateBinding Padding}">
                                                 <ContentPresenter HorizontalAlignment="Center"/>
                                             </Border>

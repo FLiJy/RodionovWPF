@@ -1,42 +1,7 @@
-﻿<!--<Window x:Class="PR15.MainWindow"
+﻿<Window x:Class="PR15.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="КонфигураторПкСборок" Height="700" Width="1000"
-        WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        --><!-- Меню навигации --><!--
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#2C3E50" Height="50">
-            <Button Content="Конфигуратор" Click="BtnBuilder_Click" 
-                    Padding="15,10" Margin="10,5" 
-                    Background="#3498DB" Foreground="White"
-                    BorderThickness="0" FontSize="14"/>
-            <Button Content="Сохранённые сборки" Click="BtnAssemblies_Click" 
-                    Padding="15,10" Margin="5" 
-                    Background="#3498DB" Foreground="White"
-                    BorderThickness="0" FontSize="14"/>
-        </StackPanel>
-
-        --><!-- Frame для навигации между страницами --><!--
-        <Frame Grid.Row="1" x:Name="MainFrame" 
-               NavigationUIVisibility="Hidden"
-               JournalOwnership="OwnsJournal"/>
-
-        <StatusBar Grid.Row="2" Background="#ECF0F1">
-            <TextBlock x:Name="StatusText" Text="Готов к работе" Padding="10,5"/>
-        </StatusBar>
-    </Grid>
-</Window>-->
-
-<Window x:Class="PR15.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="PC Builder Pro" Height="750" Width="1200"
+        Title="PR15 сборка компьютера" Height="750" Width="1200"
         WindowStartupLocation="CenterScreen"
         Background="#F5F6FA">
     <Grid>
@@ -46,20 +11,20 @@
         </Grid.ColumnDefinitions>
 
         <!-- Боковая панель навигации -->
-        <Border Grid.Column="0" Background="#2C3E50" CornerRadius="0,15,15,0">
-            <StackPanel Margin="20,40,20,20">
-                <TextBlock Text="🖥️ PC Builder" 
+        <Border Grid.Column="0" Background="DarkOrange" CornerRadius="50,15,15,50">
+            <StackPanel Margin="20,105,20,20">
+                <TextBlock Text="Сборка пк" 
                            FontSize="24" 
                            FontWeight="Bold" 
                            Foreground="White" 
                            Margin="0,0,0,40"
                            HorizontalAlignment="Center"/>
 
-                <Button Content="🔧 Конфигуратор" 
+                <Button Content="Конфигуратор" 
                         Click="BtnBuilder_Click" 
                         Padding="15,12" 
                         Margin="0,10" 
-                        Background="#3498DB" 
+                        Background="CornflowerBlue" 
                         Foreground="White"
                         BorderThickness="0" 
                         FontSize="14"
@@ -70,7 +35,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" 
-                                                CornerRadius="8" 
+                                                CornerRadius="10" 
                                                 Padding="{TemplateBinding Padding}">
                                             <ContentPresenter HorizontalAlignment="Center"/>
                                         </Border>
@@ -86,11 +51,11 @@
                     </Button.Style>
                 </Button>
 
-                <Button Content="📁 Сохранённые сборки" 
+                <Button Content="Сохранённые сборки" 
                         Click="BtnAssemblies_Click" 
                         Padding="15,12" 
                         Margin="0,10" 
-                        Background="#3498DB" 
+                        Background="CornflowerBlue" 
                         Foreground="White"
                         BorderThickness="0" 
                         FontSize="14"
@@ -101,7 +66,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" 
-                                                CornerRadius="8" 
+                                                CornerRadius="10" 
                                                 Padding="{TemplateBinding Padding}">
                                             <ContentPresenter HorizontalAlignment="Center"/>
                                         </Border>
@@ -119,15 +84,14 @@
 
                 <StackPanel VerticalAlignment="Bottom" Margin="0,40,0,0">
                     <TextBlock x:Name="StatusText" 
-                               Text="Готов к работе" 
-                               Foreground="#BDC3C7" 
+                               Text="" 
+                               Foreground="LightGray" 
                                FontSize="12"
                                HorizontalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
         </Border>
 
-        <!-- Основная область контента -->
         <Frame Grid.Column="1" x:Name="MainFrame" 
                NavigationUIVisibility="Hidden"
                JournalOwnership="OwnsJournal"/>

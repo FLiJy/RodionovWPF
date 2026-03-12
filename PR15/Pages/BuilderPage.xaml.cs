@@ -9,7 +9,7 @@ namespace PR15.Pages
 {
     public partial class BuilderPage : Page
     {
-        private List<basepart_> _currentAssembly = new List<basepart_>();
+        private List<basepart_> currentAssembly = new List<basepart_>();
 
         public BuilderPage()
         {
@@ -53,11 +53,11 @@ namespace PR15.Pages
         {
             if (DgParts.SelectedItem is basepart_ selectedPart)
             {
-                var existingType = _currentAssembly.FirstOrDefault(p => p.parttypeid == selectedPart.parttypeid);
+                var existingType = currentAssembly.FirstOrDefault(p => p.parttypeid == selectedPart.parttypeid);
                 if (existingType != null)
-                    _currentAssembly.Remove(existingType);
+                    currentAssembly.Remove(existingType);
 
-                _currentAssembly.Add(selectedPart);
+                currentAssembly.Add(selectedPart);
                 UpdateAssemblyView();
                 DgParts.SelectedItem = null;
             }
@@ -212,25 +212,25 @@ namespace PR15.Pages
         private void UpdateAssemblyView()
         {
             LbAssembly.ItemsSource = null;
-            LbAssembly.ItemsSource = _currentAssembly.ToList();
+            LbAssembly.ItemsSource = currentAssembly.ToList();
 
-            var total = _currentAssembly.Sum(p => p.price);
+            var total = currentAssembly.Sum(p => p.price);
             TxtTotalPrice.Text = $"Итого: {total:N0} ₽";
 
-            var errors = CompatibilityChecker.CheckCompatibility(_currentAssembly);
-            TxtErrors.Text = errors.Any() ? string.Join("\n", errors) : "✅ Все компоненты совместимы";
+            var errors = CompatibilityChecker.CheckCompatibility(currentAssembly);
+            TxtErrors.Text = errors.Any() ? string.Join("\n", errors) : "Все компоненты совместимы";
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (!_currentAssembly.Any())
+            if (!currentAssembly.Any())
             {
                 MessageBox.Show("Добавьте хотя бы один компонент!", "Ошибка",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            var errors = CompatibilityChecker.CheckCompatibility(_currentAssembly);
+            var errors = CompatibilityChecker.CheckCompatibility(currentAssembly);
             if (errors.Any())
             {
                 MessageBox.Show("Нельзя сохранить сборку с ошибками совместимости!\n\n" +
@@ -252,7 +252,7 @@ namespace PR15.Pages
                     context.assembly_.Add(newAssembly);
                     context.SaveChanges();
 
-                    foreach (var part in _currentAssembly)
+                    foreach (var part in currentAssembly)
                     {
                         context.partassembly_.Add(new partassembly_
                         {
@@ -265,14 +265,14 @@ namespace PR15.Pages
 
                 MessageBox.Show("Сборка успешно сохранена!", "Успех",
                     MessageBoxButton.OK, MessageBoxImage.Information);
-                _currentAssembly.Clear();
+                currentAssembly.Clear();
                 UpdateAssemblyView();
             }
         }
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            _currentAssembly.Clear();
+            currentAssembly.Clear();
             UpdateAssemblyView();
             TxtSpecs.Text = "Выберите компонент";
         }
@@ -281,7 +281,7 @@ namespace PR15.Pages
         {
             if (LbAssembly.SelectedItem is basepart_ selectedPart)
             {
-                _currentAssembly.Remove(selectedPart);
+                currentAssembly.Remove(selectedPart);
                 UpdateAssemblyView();
                 TxtSpecs.Text = "Выберите компонент";
             }

@@ -14,7 +14,7 @@ namespace PR15
             {
                 switch (parttypeid)
                 {
-                    case 1: // CPU
+                    case 1: 
                         var cpu = context.cpu_.FirstOrDefault(c => c.id == id);
                         if (cpu != null)
                         {
@@ -23,7 +23,7 @@ namespace PR15
                         }
                         break;
 
-                    case 2: // GPU
+                    case 2: 
                         var gpu = context.gpu_.FirstOrDefault(g => g.id == id);
                         if (gpu != null)
                         {
@@ -32,7 +32,7 @@ namespace PR15
                         }
                         break;
 
-                    case 3: // RAM
+                    case 3: 
                         var ram = context.ram_.FirstOrDefault(r => r.id == id);
                         if (ram != null)
                         {
@@ -41,7 +41,7 @@ namespace PR15
                         }
                         break;
 
-                    case 4: // Motherboard
+                    case 4: 
                         var mb = context.motherboard_.FirstOrDefault(m => m.id == id);
                         if (mb != null)
                         {
@@ -52,7 +52,7 @@ namespace PR15
                         }
                         break;
 
-                    case 5: // Case
+                    case 5: 
                         var caseItem = context.case_.FirstOrDefault(c => c.id == id);
                         if (caseItem != null)
                         {
@@ -61,7 +61,7 @@ namespace PR15
                         }
                         break;
 
-                    case 6: // Power Supply
+                    case 6: 
                         var psu = context.powersupply_.FirstOrDefault(p => p.id == id);
                         if (psu != null)
                         {
@@ -71,7 +71,7 @@ namespace PR15
                         }
                         break;
 
-                    case 7: // Processor Cooler
+                    case 7: 
                         var cooler = context.processorcooler_.FirstOrDefault(c => c.id == id);
                         if (cooler != null)
                         {
@@ -80,19 +80,19 @@ namespace PR15
                         }
                         break;
 
-                    case 8: // Storage Device
+                    case 8: 
                         var storage = context.storagedevice_.FirstOrDefault(s => s.id == id);
                         if (storage != null)
                         {
                             var storageType = context.storagedevicetype_.FirstOrDefault(st => st.id == storage.storagedevicetypeid);
                             var storageInterface = context.storagedeviceinterface_.FirstOrDefault(si => si.id == storage.storagedeviceinterfaceid);
 
-                            if (storage.storagedevicetypeid == 1) // SSD
+                            if (storage.storagedevicetypeid == 1) 
                             {
                                 var ssd = context.ssd_.FirstOrDefault(s => s.id == id);
                                 return $"{storageType?.name ?? "N/A"} {storageInterface?.name ?? "N/A"}, {storage.capacity}GB, TBW {ssd?.tbw ?? 0}TB";
                             }
-                            else if (storage.storagedevicetypeid == 2) // HDD
+                            else if (storage.storagedevicetypeid == 2) 
                             {
                                 var hdd = context.hdd_.FirstOrDefault(h => h.id == id);
                                 return $"{storageType?.name ?? "N/A"} {storageInterface?.name ?? "N/A"}, {storage.capacity}GB, {hdd?.rotationspeed ?? 0}RPM";
@@ -105,7 +105,6 @@ namespace PR15
             }
         }
 
-        // Публичное свойство для доступа к описанию
         public string Description => GetPartDescription();
     }
 }
