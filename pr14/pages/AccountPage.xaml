@@ -1,0 +1,48 @@
+﻿<Page x:Class="PR14.Pages.AccountPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PR14.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AccountPage">
+
+    <Grid>
+        <StackPanel Width="400"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <TextBlock Text="Личный кабинет"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Margin="0,0,0,20"
+                       HorizontalAlignment="Center"/>
+
+            <TextBlock Text="ФИО:" FontWeight="Bold"/>
+            <TextBlock x:Name="FullNameText"
+                       Margin="0,5,0,15"
+                       FontSize="16"/>
+
+            <TextBlock Text="Логин:" FontWeight="Bold"/>
+            <TextBlock x:Name="LoginText"
+                       Margin="0,5,0,20"
+                       FontSize="16"/>
+
+            <Button Content="Мои заказы"
+                    Height="35"
+                    Click="Orders_Click"/>
+
+            <Button Content="Выйти"
+                    Height="35"
+                    Margin="0,10,0,0"
+                    Click="Logout_Click"/>
+
+            <Button Content="Главное меню"
+                    Height="35"
+                    Margin="0,10,0,0"
+                    Click="Main_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

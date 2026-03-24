@@ -1,26 +1,38 @@
-﻿<Page x:Class="pr14.Pages.SessionPage"
+﻿<Page x:Class="PR14.Pages.SessionPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Выбор места">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PR14.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SessionPage">
 
-        <StackPanel Grid.Row="0" Margin="10">
-            <TextBlock x:Name="MovieTitleText" FontSize="18" FontWeight="Bold"/>
-            <TextBlock x:Name="SessionInfoText"/>
-        </StackPanel>
+    <DockPanel>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <WrapPanel x:Name="SeatsPanel" Margin="10" Width="600"/>
+        <TextBlock x:Name="SessionInfoText"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   Margin="10"
+                   DockPanel.Dock="Top"/>
+
+        <ScrollViewer Height="400" Width="610">
+            <WrapPanel x:Name="SeatsPanel"
+                       Margin="10"/>
         </ScrollViewer>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="Очистить выбор" Click="ClearSelection_Click" Margin="5" Width="120"/>
-            <Button Content="Оформить билет" Click="BookTicket_Click" Margin="5" Width="120"/>
-        </StackPanel>
-    </Grid>
+        <Button Content="Оформить билет"
+                Height="107"
+                Margin="10"
+                DockPanel.Dock="Top"
+                Click="Checkout_Click" Width="150"/>
+
+        <Button Content="Главное меню"
+                Height="35"
+                Margin="10"
+                Click="Main_Click" Width="158"/>
+
+
+    </DockPanel>
+
 </Page>

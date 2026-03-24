@@ -1,0 +1,20 @@
+﻿namespace PR14
+{
+    using System;
+    using System.Collections.Generic;
+
+    public partial class Genres
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Genres()
+        {
+            this.Movies = new HashSet<Movies>();
+        }
+
+        public int GenreID { get; set; }
+        public string Name { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Movies> Movies { get; set; }
+    }
+}

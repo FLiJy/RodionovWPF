@@ -1,48 +1,65 @@
-﻿using System.Linq;
+﻿`using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace pr14.Pages
+namespace PR14.Pages
 {
+    /// <summary>
+    /// Логика взаимодействия для LoginPage.xaml
+    /// </summary>
     public partial class LoginPage : Page
     {
-        private MainWindow mainWindow;
-
-        public LoginPage(MainWindow window)
+        public LoginPage()
         {
             InitializeComponent();
-            mainWindow = window;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            string email = EmailBox.Text.Trim();
+            string login = LoginBox.Text.Trim();
             string password = PasswordBox.Password.Trim();
 
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Введите email");
+                MessageBox.Show("Введите логин и пароль.");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(password))
+            var user = Core.Context.Users
+                .FirstOrDefault(u => u.Login == login && u.Password == password);
+
+            if (user == null)
             {
-                MessageBox.Show("Введите пароль");
+                MessageBox.Show("Неверный логин или пароль.");
                 return;
             }
 
-            var user = Core.Context.users.FirstOrDefault(u => u.email == email && u.password == password);
+            Core.CurrentUser = user;
 
-            if (user != null)
-            {
-                Core.CurrentUser = user; 
-                MessageBox.Show($"Добро пожаловать, {user.firstname} {user.lastname}!");
-                mainWindow.MainFrame.Content = new HomePage(mainWindow);
-            }
-            else
-            {
-                MessageBox.Show("Неверный email или пароль");
-            }
+            MessageBox.Show("Вы успешно вошли.");
+
+            NavigationService.Navigate(new MainPage());
+        }
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new RegisterPage());
+        }
+        private void Main_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage());
+            Core.Context.Movies
         }
     }
 }

@@ -1,83 +1,71 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace pr14.Pages
+namespace PR14.Pages
 {
+    /// <summary>
+    /// Логика взаимодействия для RegisterPage.xaml
+    /// </summary>
     public partial class RegisterPage : Page
     {
-        private MainWindow mainWindow;
-
-        public RegisterPage(MainWindow window)
+        public RegisterPage()
         {
             InitializeComponent();
-            mainWindow = window;
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            string email = EmailBox.Text.Trim();
+            string fullName = FullNameBox.Text.Trim();
+            string login = LoginBox.Text.Trim();
             string password = PasswordBox.Password.Trim();
-            string firstname = FirstNameBox.Text.Trim();
-            string lastname = LastNameBox.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrEmpty(fullName) ||
+                string.IsNullOrEmpty(login) ||
+                string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Введите email");
+                MessageBox.Show("Заполните все поля.");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(password))
+            bool loginExists = Core.Context.Users
+                .Any(u => u.Login == login);
+
+            if (loginExists)
             {
-                MessageBox.Show("Введите пароль");
+                MessageBox.Show("Пользователь с таким логином уже существует.");
                 return;
             }
 
-            if (password.Length < 6)
+            var newUser = new Users
             {
-                MessageBox.Show("Пароль должен быть не менее 6 символов");
-                return;
-            }
+                FullName = fullName,
+                Login = login,
+                Password = password
+            };
 
-            if (string.IsNullOrWhiteSpace(firstname))
-            {
-                MessageBox.Show("Введите имя");
-                return;
-            }
+            Core.Context.Users.Add(newUser);
+            Core.Context.SaveChanges();
 
-            if (string.IsNullOrWhiteSpace(lastname))
-            {
-                MessageBox.Show("Введите фамилию");
-                return;
-            }
+            MessageBox.Show("Регистрация успешна.");
 
-            var existingUser = Core.Context.users.FirstOrDefault(u => u.email == email);
-            if (existingUser != null)
-            {
-                MessageBox.Show("Пользователь с таким email уже существует");
-                return;
-            }
+            NavigationService.Navigate(new LoginPage());
+        }
 
-            try
-            {
-                var newUser = new users
-                {
-                    email = email,
-                    password = password,
-                    firstname = firstname,
-                    lastname = lastname
-                };
-
-                Core.Context.users.Add(newUser);
-                Core.Context.SaveChanges();
-
-                MessageBox.Show("Регистрация успешна! Теперь войдите в аккаунт");
-                mainWindow.MainFrame.Content = new LoginPage(mainWindow);
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show($"Ошибка при регистрации: {ex.Message}");
-            }
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new LoginPage());
         }
     }
 }

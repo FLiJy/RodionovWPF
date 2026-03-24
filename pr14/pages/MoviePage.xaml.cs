@@ -1,127 +1,97 @@
-﻿using System;
+﻿using pr14.Pages;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace pr14.Pages
+namespace PR14.Pages
 {
+    /// <summary>
+    /// Логика взаимодействия для MoviePage.xaml
+    /// </summary>
     public partial class MoviePage : Page
     {
-        private MainWindow mainWindow;
-        private int movieId;
+        public int _movieId;
 
-        public MoviePage(MainWindow window, int id)
+        public MoviePage(int movieId)
         {
             InitializeComponent();
-            mainWindow = window;
-            movieId = id;
+            _movieId = movieId;
             LoadMovie();
         }
 
         private void LoadMovie()
         {
-            var movie = Core.Context.Movies.FirstOrDefault(m => m.movie_id == movieId);
+            var movie = Core.Context.Movies
+                .FirstOrDefault(m => m.MovieID == _movieId);
+
             if (movie == null)
-            {
-                MessageBox.Show("Фильм не найден");
-                mainWindow.MainFrame.Content = new HomePage(mainWindow);
                 return;
-            }
 
-            TitleText.Text = movie.title;
-            DescriptionText.Text = movie.description ?? "Описание отсутствует";
-            RatingText.Text = $"Рейтинг: {movie.rating}";
-            ReleaseDateText.Text = $"Дата выхода: {movie.release_date}";
+            TitleText.Text = movie.Title;
+            RatingText.Text = movie.Rating.ToString();
+            AgeText.Text = movie.AgeRating;
+            DescriptionText.Text = movie.Description;
 
-            LoadGenres(movie);
-            LoadAgeRating(movie);
-            LoadSessions();
-        }
-
-        private void LoadGenres(Movies movie)
-        {
-            var genres = Core.Context.movie_genres.Where(mg => mg.movie_id == movie.movie_id).ToList();
-            string genreNames = "";
-
-            foreach (var mg in genres)
+            if (!string.IsNullOrWhiteSpace(movie.ImagePath))
             {
-                var genre = Core.Context.genres.FirstOrDefault(g => g.genre_id == mg.genre_id);
-                if (genre != null)
+                try
                 {
-                    if (genreNames.Length > 0) genreNames += ", ";
-                    genreNames += genre.genre_name;
+                    var uri = new Uri(movie.ImagePath, UriKind.RelativeOrAbsolute);
+                    MovieImage.Source = new BitmapImage(uri);
+                }
+                catch
+                {
+                    MovieImage.Source = null;
                 }
             }
 
-            if (genreNames.Length > 0)
+            var genre = Core.Context.Movies.FirstOrDefault(m => m.MovieID == _movieId);
+
+            if (movie != null)
             {
-                GenresText.Text = $"Жанры: {genreNames}";
+                var genres = movie.Genres.Select(g => g.Name).ToList();
+                GenresText.Text = string.Join(", ", genres);
             }
+
+            // Сеансы
+            var sessions = Core.Context.Sessions
+                .Where(s => s.MovieID == _movieId)
+                .OrderBy(s => s.ShowTime)
+                .ToList();
+
+            SessionsList.ItemsSource = sessions;
         }
 
-        private void LoadAgeRating(Movies movie)
+        private void SelectSession_Click(object sender, RoutedEventArgs e)
         {
-            var ageRating = Core.Context.AgeRating.FirstOrDefault(a => a.Id == movie.age_ratingId);
-            if (ageRating != null)
+            int sessionId = (int)((Button)sender).Tag;
+            if (Core.CurrentUser == null)
             {
-                AgeRatingText.Text = $"Возрастное ограничение: {ageRating.limitation}";
-            }
-        }
+                MessageBox.Show("Войдите в аккаунт или зарегайтесь.");
+                NavigationService.Navigate(new LoginPage());
 
-        private void LoadSessions()
-        {
-            SessionsPanel.Children.Clear();
-            var sessions = Core.Context.sessions.Where(s => s.movie_id == movieId).ToList();
-
-            if (sessions.Count == 0)
-            {
-                TextBlock noSessionsText = new TextBlock();
-                noSessionsText.Text = "Сеансы отсутствуют";
-                SessionsPanel.Children.Add(noSessionsText);
                 return;
             }
 
-            foreach (var session in sessions)
-            {
-                AddSessionToPanel(session);
-            }
+            else
+                NavigationService.Navigate(new SessionPage(sessionId));
+
         }
 
-        private void AddSessionToPanel(sessions session)
+        private void Main_Click(object sender, RoutedEventArgs e)
         {
-            Border sessionBorder = new Border();
-            sessionBorder.BorderBrush = System.Windows.Media.Brushes.Black;
-            sessionBorder.BorderThickness = new Thickness(1);
-            sessionBorder.Margin = new Thickness(0, 5, 0, 5);
-            sessionBorder.Padding = new Thickness(10);
-            sessionBorder.Cursor = System.Windows.Input.Cursors.Hand;
-            sessionBorder.MouseLeftButtonDown += (s, e) => Session_Click(session);
-
-            StackPanel sessionPanel = new StackPanel();
-
-            TextBlock dateTimeText = new TextBlock();
-            dateTimeText.Text = $"Дата и время: {session.session_datetime}";
-            sessionPanel.Children.Add(dateTimeText);
-
-            var hall = Core.Context.halls.FirstOrDefault(h => h.hall_id == session.hall_id);
-            if (hall != null)
-            {
-                TextBlock hallText = new TextBlock();
-                hallText.Text = $"Зал: {hall.hallNumber} ({hall.hall_type})";
-                sessionPanel.Children.Add(hallText);
-            }
-
-            TextBlock priceText = new TextBlock();
-            priceText.Text = $"Цена: {session.price} руб.";
-            sessionPanel.Children.Add(priceText);
-
-            sessionBorder.Child = sessionPanel;
-            SessionsPanel.Children.Add(sessionBorder);
-        }
-
-        private void Session_Click(sessions session)
-        {
-            mainWindow.MainFrame.Content = new SessionPage(mainWindow, session.session_id);
+            NavigationService.Navigate(new MainPage());
         }
     }
 }

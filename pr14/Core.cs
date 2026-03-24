@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pr14
+namespace PR14
 {
-    class Core
+    public class Core
     {
-        public static pr14Entities Context = new pr14Entities();
-        public static users CurrentUser = null;
+        public static ULIPR14Entities Context = new ULIPR14Entities();
+        public static Users CurrentUser;
     }
 }

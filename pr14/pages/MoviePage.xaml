@@ -1,17 +1,93 @@
-﻿<Page x:Class="pr14.Pages.MoviePage"
+﻿<Page x:Class="PR14.Pages.MoviePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Фильм">
-    <Grid>
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PR14.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MoviePage">
+
+    <ScrollViewer>
         <StackPanel Margin="20">
-            <TextBlock x:Name="TitleText" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
-            <TextBlock x:Name="DescriptionText" TextWrapping="Wrap" Margin="0,0,0,10"/>
-            <TextBlock x:Name="RatingText" Margin="0,0,0,5"/>
-            <TextBlock x:Name="GenresText" Margin="0,0,0,5"/>
-            <TextBlock x:Name="AgeRatingText" Margin="0,0,0,5"/>
-            <TextBlock x:Name="ReleaseDateText" Margin="0,0,0,20"/>
-            <TextBlock Text="Сеансы:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <StackPanel x:Name="SessionsPanel"/>
+
+            <StackPanel Orientation="Horizontal">
+
+                <Image x:Name="MovieImage"
+                       Width="250"
+                       Height="350"
+                       Stretch="UniformToFill"
+                       Margin="0,0,20,0"/>
+
+                <StackPanel Width="600">
+
+                    <Button Content="Главное меню"
+        Height="35"
+        Click="Main_Click" Width="248"/>
+
+                    <TextBlock x:Name="TitleText"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="Рейтинг:"
+                               Margin="0,10,0,0"/>
+                    <TextBlock x:Name="RatingText"/>
+
+                    <TextBlock Text="Возрастной рейтинг:"
+                               Margin="0,10,0,0"/>
+                    <TextBlock x:Name="AgeText"/>
+
+                    <TextBlock Text="Жанры:"
+                               Margin="0,10,0,0"/>
+                    <TextBlock x:Name="GenresText"
+                               TextWrapping="Wrap"/>
+
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock Text="Описание:"
+                       FontWeight="Bold"
+                       Margin="0,20,0,5"/>
+
+            <TextBlock x:Name="DescriptionText"
+                       TextWrapping="Wrap"/>
+
+            <TextBlock Text="Сеансы:"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0,20,0,10"/>
+
+            <ItemsControl x:Name="SessionsList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1"
+                                BorderBrush="Gray"
+                                Margin="5"
+                                Padding="10">
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="{Binding ShowTime}"
+                                           Width="200"/>
+
+                                <TextBlock Text="{Binding Halls.Name}"
+                                           Width="150"/>
+
+                                <TextBlock Text="{Binding Halls.Classification}"
+                                           Width="150"/>
+
+                                <TextBlock Text="{Binding Price}"
+                                           Width="100"/>
+
+                                <Button Content="Выбрать"
+                                        Tag="{Binding SessionID}"
+                                        Click="SelectSession_Click"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
         </StackPanel>
-    </Grid>
+    </ScrollViewer>
 </Page>

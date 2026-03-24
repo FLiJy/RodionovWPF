@@ -1,144 +1,134 @@
-﻿using System;
+﻿using pr14;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace pr14.Pages
+namespace PR14.Pages
 {
+    /// <summary>
+    /// Логика взаимодействия для SessionPage.xaml
+    /// </summary>
     public partial class SessionPage : Page
     {
-        private MainWindow mainWindow;
-        private int sessionId;
-        private int selectedSeatId = -1;
+        private int _sessionId;
+        private int _selectedSeatId = -1;
 
-        public SessionPage(MainWindow window, int id)
+        public SessionPage(int sessionId)
         {
             InitializeComponent();
-            mainWindow = window;
-            sessionId = id;
+            _sessionId = sessionId;
+
+            if (Core.CurrentUser == null)
+            {
+                MessageBox.Show("Для покупки билета необходимо войти в аккаунт.");
+                ((MainWindow)Application.Current.MainWindow).MainFrame.Navigate(new LoginPage());
+                return;
+
+            }
+
             LoadSession();
         }
 
         private void LoadSession()
         {
-            var session = Core.Context.sessions.FirstOrDefault(s => s.session_id == sessionId);
+            var session = Core.Context.Sessions
+                .FirstOrDefault(s => s.SessionID == _sessionId);
+
             if (session == null)
             {
-                MessageBox.Show("Сеанс не найден");
-                mainWindow.MainFrame.Content = new HomePage(mainWindow);
+                MessageBox.Show("Сеанс не найден.");
+                NavigationService.GoBack();
                 return;
             }
 
-            var movie = Core.Context.Movies.FirstOrDefault(m => m.movie_id == session.movie_id);
-            if (movie != null)
+            var hall = Core.Context.Halls.FirstOrDefault(h => h.HallID == session.HallID);
+            if (hall == null)
             {
-                MovieTitleText.Text = $"Фильм: {movie.title}";
+                MessageBox.Show("Зал не найден.");
+                NavigationService.GoBack();
+                return;
             }
 
-            SessionInfoText.Text = $"Дата: {session.session_datetime} Цена: {session.price} руб.";
-            LoadSeats(session.hall_id);
-        }
+            SessionInfoText.Text =
+                $"{session.ShowTime} | Зал: {hall.Name} | Цена: {session.Price}";
 
-        private void LoadSeats(int hallId)
-        {
+            var seats = Core.Context.Seats
+                .Where(s => s.HallID == hall.HallID)
+                .OrderBy(s => s.RowNumber)
+                .ThenBy(s => s.SeatNumber)
+                .ToList();
+
+            var occupiedSeatIds = Core.Context.Tickets
+                .Where(t => t.SessionID == _sessionId)
+                .Select(t => t.SeatID)
+                .ToList();
+
             SeatsPanel.Children.Clear();
-            var seats = Core.Context.seats.Where(s => s.hall_id == hallId).OrderBy(s => s.Seats_number).ToList();
 
             foreach (var seat in seats)
             {
-                Button seatButton = new Button();
-                seatButton.Content = seat.Seats_number;
-                seatButton.Width = 50;
-                seatButton.Height = 50;
-                seatButton.Margin = new Thickness(2);
-                seatButton.Tag = seat.Seats_id;
-
-                if (IsSeatOccupied(seat.Seats_id))
+                var btn = new Button
                 {
-                    seatButton.Background = Brushes.Red;
-                    seatButton.IsEnabled = false;
+                    Content = $"{seat.RowNumber}-{seat.SeatNumber}",
+                    Width = 60,
+                    Height = 40,
+                    Margin = new Thickness(5),
+                    Tag = seat.SeatID
+                };
+
+                if (occupiedSeatIds.Contains(seat.SeatID))
+                {
+                    btn.Background = Brushes.Red;
+                    btn.IsEnabled = false;
                 }
                 else
                 {
-                    seatButton.Background = Brushes.LightGray;
-                    seatButton.Click += SeatButton_Click;
+                    btn.Background = Brushes.LightGreen;
+                    btn.Click += Seat_Click;
                 }
 
-                SeatsPanel.Children.Add(seatButton);
+                SeatsPanel.Children.Add(btn);
             }
         }
 
-        private bool IsSeatOccupied(int seatId)
+        private void Seat_Click(object sender, RoutedEventArgs e)
         {
-            var ticket = Core.Context.tickets.FirstOrDefault(t =>
-                t.session_id == sessionId && t.seats_id == seatId);
-            return ticket != null;
+            foreach (Button btn in SeatsPanel.Children)
+                btn.BorderThickness = new Thickness(1);
+
+            Button clicked = sender as Button;
+            clicked.BorderThickness = new Thickness(3);
+            clicked.BorderBrush = Brushes.Blue;
+
+            _selectedSeatId = (int)clicked.Tag;
         }
 
-        private void SeatButton_Click(object sender, RoutedEventArgs e)
+        private void Checkout_Click(object sender, RoutedEventArgs e)
         {
-            Button clickedButton = sender as Button;
-            if (clickedButton == null) return;
-
-            int seatId = (int)clickedButton.Tag;
-
-            if (selectedSeatId == seatId)
+            if (_selectedSeatId == -1)
             {
-                clickedButton.Background = Brushes.LightGray;
-                selectedSeatId = -1;
-            }
-            else
-            {
-                if (selectedSeatId != -1)
-                {
-                    var previousButton = FindSeatButton(selectedSeatId);
-                    if (previousButton != null)
-                    {
-                        previousButton.Background = Brushes.LightGray;
-                    }
-                }
-
-                clickedButton.Background = Brushes.Green;
-                selectedSeatId = seatId;
-            }
-        }
-
-        private Button FindSeatButton(int seatId)
-        {
-            foreach (var child in SeatsPanel.Children)
-            {
-                var button = child as Button;
-                if (button != null && (int)button.Tag == seatId)
-                {
-                    return button;
-                }
-            }
-            return null;
-        }
-
-        private void ClearSelection_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedSeatId != -1)
-            {
-                var button = FindSeatButton(selectedSeatId);
-                if (button != null)
-                {
-                    button.Background = Brushes.LightGray;
-                }
-                selectedSeatId = -1;
-            }
-        }
-
-        private void BookTicket_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedSeatId == -1)
-            {
-                MessageBox.Show("Выберите место");
+                MessageBox.Show("Выберите место.");
                 return;
             }
 
-            mainWindow.MainFrame.Content = new TicketPage(mainWindow, sessionId, selectedSeatId);
+            NavigationService.Navigate(
+                new CheckoutPage(_sessionId, _selectedSeatId));
+        }
+
+        private void Main_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage());
         }
     }
 }
