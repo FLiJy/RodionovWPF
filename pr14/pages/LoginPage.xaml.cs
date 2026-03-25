@@ -1,4 +1,4 @@
-﻿`using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace pr14.Pages
+namespace PR14.Pages
 {
     /// <summary>
     /// Логика взаимодействия для LoginPage.xaml
@@ -59,7 +59,6 @@ namespace pr14.Pages
         private void Main_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MainPage());
-            Core.Context.Movies
         }
     }
 }

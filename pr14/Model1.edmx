@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ULIpr14Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище ULIPR14Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Genres">
           <Key>
             <PropertyRef Name="GenreID" />
@@ -189,7 +189,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище ULIpr14ModelContainer">
+        <EntityContainer Name="Хранилище ULIPR14ModelContainer">
           <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Halls" EntityType="Self.Halls" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
@@ -236,7 +236,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ULIpr14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ULIPR14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Genres">
           <Key>
             <PropertyRef Name="GenreID" />
@@ -403,7 +403,7 @@
           <End Role="Genres" Type="Self.Genres" Multiplicity="*" />
           <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ULIpr14Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ULIPR14Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Genres" EntityType="Self.Genres" />
           <EntitySet Name="Halls" EntityType="Self.Halls" />
           <EntitySet Name="Movies" EntityType="Self.Movies" />
@@ -446,9 +446,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ULIpr14ModelContainer" CdmEntityContainer="ULIpr14Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ULIPR14ModelContainer" CdmEntityContainer="ULIPR14Entities">
           <EntitySetMapping Name="Genres">
-            <EntityTypeMapping TypeName="ULIpr14Model.Genres">
+            <EntityTypeMapping TypeName="ULIPR14Model.Genres">
               <MappingFragment StoreEntitySet="Genres">
                 <ScalarProperty Name="GenreID" ColumnName="GenreID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -456,7 +456,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Halls">
-            <EntityTypeMapping TypeName="ULIpr14Model.Halls">
+            <EntityTypeMapping TypeName="ULIPR14Model.Halls">
               <MappingFragment StoreEntitySet="Halls">
                 <ScalarProperty Name="HallID" ColumnName="HallID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -465,7 +465,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Movies">
-            <EntityTypeMapping TypeName="ULIpr14Model.Movies">
+            <EntityTypeMapping TypeName="ULIPR14Model.Movies">
               <MappingFragment StoreEntitySet="Movies">
                 <ScalarProperty Name="MovieID" ColumnName="MovieID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -478,7 +478,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Seats">
-            <EntityTypeMapping TypeName="ULIpr14Model.Seats">
+            <EntityTypeMapping TypeName="ULIPR14Model.Seats">
               <MappingFragment StoreEntitySet="Seats">
                 <ScalarProperty Name="SeatID" ColumnName="SeatID" />
                 <ScalarProperty Name="HallID" ColumnName="HallID" />
@@ -488,7 +488,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sessions">
-            <EntityTypeMapping TypeName="ULIpr14Model.Sessions">
+            <EntityTypeMapping TypeName="ULIPR14Model.Sessions">
               <MappingFragment StoreEntitySet="Sessions">
                 <ScalarProperty Name="SessionID" ColumnName="SessionID" />
                 <ScalarProperty Name="MovieID" ColumnName="MovieID" />
@@ -499,7 +499,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ULIpr14Model.sysdiagrams">
+            <EntityTypeMapping TypeName="ULIPR14Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -510,7 +510,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tickets">
-            <EntityTypeMapping TypeName="ULIpr14Model.Tickets">
+            <EntityTypeMapping TypeName="ULIPR14Model.Tickets">
               <MappingFragment StoreEntitySet="Tickets">
                 <ScalarProperty Name="TicketID" ColumnName="TicketID" />
                 <ScalarProperty Name="SessionID" ColumnName="SessionID" />
@@ -520,7 +520,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="ULIpr14Model.Users">
+            <EntityTypeMapping TypeName="ULIPR14Model.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
@@ -529,7 +529,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="MoviesGenres" TypeName="ULIpr14Model.MoviesGenres" StoreEntitySet="MoviesGenres">
+          <AssociationSetMapping Name="MoviesGenres" TypeName="ULIPR14Model.MoviesGenres" StoreEntitySet="MoviesGenres">
             <EndProperty Name="Genres">
               <ScalarProperty Name="GenreID" ColumnName="GenreID" />
             </EndProperty>

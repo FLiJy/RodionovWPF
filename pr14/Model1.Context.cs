@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace pr14
+namespace PR14
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ULIpr14Entities : DbContext
+    public partial class ULIPR14Entities : DbContext
     {
-        public ULIpr14Entities()
-            : base("name=ULIpr14Entities")
+        public ULIPR14Entities()
+            : base("name=ULIPR14Entities")
         {
         }
     

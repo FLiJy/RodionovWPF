@@ -1,6 +1,4 @@
-﻿using pr14;
-using pr14.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace pr14.Pages
+namespace PR14.Pages
 {
     /// <summary>
     /// Логика взаимодействия для MainPage.xaml
@@ -75,7 +73,7 @@ namespace pr14.Pages
             {
                 NavigationService.Navigate(new AccountPage());
             }
-
+                
         }
     }
 }

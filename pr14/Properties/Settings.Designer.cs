@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace pr14.Properties
+namespace PR14.Properties
 {
 
 

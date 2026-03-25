@@ -1,8 +1,7 @@
-﻿using pr14.Pages;
+﻿using PR14.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace pr14
+namespace PR14
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

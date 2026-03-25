@@ -1,6 +1,4 @@
-﻿using pr14;
-using pr14.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace pr14.Pages
+namespace PR14.Pages
 {
     /// <summary>
     /// Логика взаимодействия для MoviePage.xaml
@@ -65,7 +63,6 @@ namespace pr14.Pages
                 GenresText.Text = string.Join(", ", genres);
             }
 
-            // Сеансы
             var sessions = Core.Context.Sessions
                 .Where(s => s.MovieID == _movieId)
                 .OrderBy(s => s.ShowTime)
@@ -81,10 +78,10 @@ namespace pr14.Pages
             {
                 MessageBox.Show("Войдите в аккаунт или зарегайтесь.");
                 NavigationService.Navigate(new LoginPage());
-
+                
                 return;
             }
-
+                
             else
                 NavigationService.Navigate(new SessionPage(sessionId));
 

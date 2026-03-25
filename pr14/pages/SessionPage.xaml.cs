@@ -1,5 +1,4 @@
-﻿using pr14;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace pr14.Pages
+namespace PR14.Pages
 {
     /// <summary>
     /// Логика взаимодействия для SessionPage.xaml
@@ -34,7 +33,7 @@ namespace pr14.Pages
                 MessageBox.Show("Для покупки билета необходимо войти в аккаунт.");
                 ((MainWindow)Application.Current.MainWindow).MainFrame.Navigate(new LoginPage());
                 return;
-
+               
             }
 
             LoadSession();

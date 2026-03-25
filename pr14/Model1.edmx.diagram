@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d154b7954e8741edb733a27eacdb7a79" Name="Diagram1">
-        <EntityTypeShape EntityType="ULIpr14Model.Genres" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ULIpr14Model.Halls" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ULIpr14Model.Movies" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ULIpr14Model.Seats" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ULIpr14Model.Sessions" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ULIpr14Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ULIpr14Model.Tickets" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ULIpr14Model.Users" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
-        <AssociationConnector Association="ULIpr14Model.FK__Seats__HallID__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="ULIpr14Model.FK__Sessions__HallID__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="ULIpr14Model.FK__Sessions__MovieI__59FA5E80" ManuallyRouted="false" />
-        <AssociationConnector Association="ULIpr14Model.FK__Tickets__SeatID__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="ULIpr14Model.FK__Tickets__Session__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="ULIpr14Model.FK__Tickets__UserID__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="ULIpr14Model.MoviesGenres" ManuallyRouted="false" />
+      <Diagram DiagramId="bcfabbc1c23f4bb0bcd154990dd101bf" Name="Diagram1">
+        <EntityTypeShape EntityType="ULIPR14Model.Genres" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ULIPR14Model.Halls" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ULIPR14Model.Movies" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ULIPR14Model.Seats" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ULIPR14Model.Sessions" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ULIPR14Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ULIPR14Model.Tickets" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ULIPR14Model.Users" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="ULIPR14Model.FK__Seats__HallID__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="ULIPR14Model.FK__Sessions__HallID__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="ULIPR14Model.FK__Sessions__MovieI__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="ULIPR14Model.FK__Tickets__SeatID__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="ULIPR14Model.FK__Tickets__Session__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="ULIPR14Model.FK__Tickets__UserID__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="ULIPR14Model.MoviesGenres" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
