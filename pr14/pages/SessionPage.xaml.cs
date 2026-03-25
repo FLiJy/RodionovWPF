@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PR14.Pages
+namespace pr14.Pages
 {
     /// <summary>
     /// Логика взаимодействия для SessionPage.xaml

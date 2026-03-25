@@ -1,4 +1,4 @@
 <Solution>
+  <Project Path="../PRpr14/PR14/PR14.csproj" Id="bf1987f8-81c6-4a70-8c08-e3e454c675f5" />
   <Project Path="master/master.csproj" Id="b0ceb86f-cdd0-4ad7-a34d-bf9f98af59c1" />
-  <Project Path="pr14/pr14.csproj" Id="3538f559-33dd-4e0c-abb8-7b5d93175ab5" />
 </Solution>

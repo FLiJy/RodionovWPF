@@ -1,4 +1,5 @@
-﻿using pr14.Pages;
+﻿using pr14;
+using pr14.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PR14.Pages
+namespace pr14.Pages
 {
     /// <summary>
     /// Логика взаимодействия для MoviePage.xaml

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pr14;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PR14.Pages
+namespace pr14.Pages
 {
     /// <summary>
     /// Логика взаимодействия для RegisterPage.xaml

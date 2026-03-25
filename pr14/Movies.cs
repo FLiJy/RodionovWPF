@@ -12,22 +12,26 @@ namespace pr14
     using System;
     using System.Collections.Generic;
     
-    public partial class Halls
+    public partial class Movies
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Halls()
+        public Movies()
         {
-            this.Seats = new HashSet<Seats>();
             this.Sessions = new HashSet<Sessions>();
+            this.Genres = new HashSet<Genres>();
         }
     
-        public int HallID { get; set; }
-        public string Name { get; set; }
-        public string Classification { get; set; }
+        public int MovieID { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Nullable<decimal> Rating { get; set; }
+        public Nullable<System.DateTime> ReleaseDate { get; set; }
+        public string AgeRating { get; set; }
+        public string ImagePath { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Seats> Seats { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sessions> Sessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Genres> Genres { get; set; }
     }
 }

@@ -1,34 +1,31 @@
-﻿using System.Windows;
-using pr14.Pages;
+﻿using pr14.Pages;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace pr14
 {
+    /// <summary>
+    /// Логика взаимодействия для MainWindow.xaml
+    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Content = new HomePage(this);
-        }
-
-        private void Home_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new HomePage(this);
-        }
-
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new LoginPage(this);
-        }
-
-        private void Register_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new RegisterPage(this);
-        }
-
-        private void Profile_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new ProfilePage(this);
+            MainFrame.Navigate(new Pages.MainPage());
         }
     }
 }
