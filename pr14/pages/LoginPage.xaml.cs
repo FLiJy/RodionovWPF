@@ -70,17 +70,7 @@ namespace PR14.Pages
             NavigationService.Navigate(new MainPage());
         }
 
-        // ===== КАПЧА (ЗАКОММЕНТИРОВАНО) =====
-        /*
-        private string GenerateCaptcha()
-        {
-            var rand = new Random();
-            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ123456789";
-            return new string(Enumerable.Repeat(chars, 5)
-                .Select(s => s[rand.Next(s.Length)]).ToArray());
-        }
-        */
-        // ===================================
+ 
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
