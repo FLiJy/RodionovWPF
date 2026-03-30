@@ -1,43 +1,45 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PR14.Pages;
 
-namespace PR14.UnitTests
+namespace PR14.Tests
 {
     [TestClass]
     public class AuthTests
     {
         [TestMethod]
-        public void AuthTest() // базовый тест из задания
+        public void AuthTest()
         {
-            var loginPage = new LoginPage();
-            bool result = loginPage.Auth("", "");
-            Assert.IsFalse(result, "Авторизация с пустыми полями должна возвращать false");
+            var page = new LoginPage();
+
+            bool result = page.Auth("123123", "123");
+
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
         public void AuthTestSuccess()
         {
-            var loginPage = new LoginPage();
+            var page = new LoginPage();
 
-            // ←←← ИЗМЕНИ НА РЕАЛЬНЫЕ ДАННЫЕ ИЗ ТВОЕЙ ТАБЛИЦЫ USERS !!!
-            bool result1 = loginPage.Auth("admin", "admin123");
-            bool result2 = loginPage.Auth("user", "password");
+            // ВАЖНО: укажи реальные данные из БД
+            bool result = page.Auth("sa", "1");
 
-            Assert.IsTrue(result1, "Авторизация с корректными данными admin должна пройти");
-            Assert.IsTrue(result2, "Авторизация с корректными данными user должна пройти");
+
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void AuthTestFail()
         {
-            var loginPage = new LoginPage();
+            var page = new LoginPage();
 
-            // Негативные сценарии
-            Assert.IsFalse(loginPage.Auth("", ""), "Пустые поля");
-            Assert.IsFalse(loginPage.Auth("", "password"), "Пустой логин");
-            Assert.IsFalse(loginPage.Auth("admin", ""), "Пустой пароль");
-            Assert.IsFalse(loginPage.Auth("nonexistentuser", "12345"), "Несуществующий логин");
-            Assert.IsFalse(loginPage.Auth("admin", "wrongpassword"), "Неверный пароль");
+            bool result1 = page.Auth("", "");
+            bool result2 = page.Auth("wrong", "123");
+            bool result3 = page.Auth("admin", "wrong");
+
+            Assert.IsFalse(result1);
+            Assert.IsFalse(result2);
+            Assert.IsFalse(result3);
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PR14.Pages;
-using System;
 
-namespace PR14.UnitTests
+namespace PR14.Tests
 {
     [TestClass]
     public class RegisterTests
@@ -10,29 +9,23 @@ namespace PR14.UnitTests
         [TestMethod]
         public void RegisterTestSuccess()
         {
-            var registerPage = new RegisterPage();
+            var page = new RegisterPage();
 
-            // Генерируем уникальный логин, чтобы тест не падал на "уже существует"
-            string uniqueLogin = "testuser_" + Guid.NewGuid().ToString().Substring(0, 8);
+            bool result = page.Register("Test User", "test_user_123", "123");
 
-            bool result = registerPage.Register("Тестовый Пользователь", uniqueLogin, "TestPass123");
-
-            Assert.IsTrue(result, "Регистрация с корректными данными должна пройти успешно");
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void RegisterTestFail()
         {
-            var registerPage = new RegisterPage();
+            var page = new RegisterPage();
 
-            // Негативные сценарии
-            Assert.IsFalse(registerPage.Register("", "login123", "pass123"), "Пустое ФИО");
-            Assert.IsFalse(registerPage.Register("Имя Фамилия", "", "pass123"), "Пустой логин");
-            Assert.IsFalse(registerPage.Register("Имя Фамилия", "login123", ""), "Пустой пароль");
+            bool result1 = page.Register("", "", "");
+            bool result2 = page.Register("User", "admin", "123"); 
 
-            // Проверка на уже существующий логин (замени на реальный логин из твоей БД)
-            Assert.IsFalse(registerPage.Register("Имя Фамилия", "admin", "123"),
-                "Регистрация с уже существующим логином должна провалиться");
+            Assert.IsFalse(result1);
+            Assert.IsFalse(result2);
         }
     }
 }

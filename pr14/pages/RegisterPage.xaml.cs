@@ -1,23 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PR14.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для RegisterPage.xaml
-    /// </summary>
     public partial class RegisterPage : Page
     {
         public RegisterPage()
@@ -25,28 +13,19 @@ namespace PR14.Pages
             InitializeComponent();
         }
 
-        private void Register_Click(object sender, RoutedEventArgs e)
+        // 🔹 Метод для тестов
+        public bool Register(string fullName, string login, string password)
         {
-            string fullName = FullNameBox.Text.Trim();
-            string login = LoginBox.Text.Trim();
-            string password = PasswordBox.Password.Trim();
-
             if (string.IsNullOrEmpty(fullName) ||
                 string.IsNullOrEmpty(login) ||
                 string.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Заполните все поля.");
-                return;
-            }
+                return false;
 
             bool loginExists = Core.Context.Users
                 .Any(u => u.Login == login);
 
             if (loginExists)
-            {
-                MessageBox.Show("Пользователь с таким логином уже существует.");
-                return;
-            }
+                return false;
 
             var newUser = new Users
             {
@@ -58,8 +37,22 @@ namespace PR14.Pages
             Core.Context.Users.Add(newUser);
             Core.Context.SaveChanges();
 
-            MessageBox.Show("Регистрация успешна.");
+            return true;
+        }
 
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            string fullName = FullNameBox.Text.Trim();
+            string login = LoginBox.Text.Trim();
+            string password = PasswordBox.Password.Trim();
+
+            if (!Register(fullName, login, password))
+            {
+                MessageBox.Show("Ошибка регистрации.");
+                return;
+            }
+
+            MessageBox.Show("Регистрация успешна.");
             NavigationService.Navigate(new LoginPage());
         }
 

@@ -1,28 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PR14.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для LoginPage.xaml
-    /// </summary>
     public partial class LoginPage : Page
     {
+     
+        private int failedAttempts = 0;
+
         public LoginPage()
         {
             InitializeComponent();
+        }
+
+        public bool Auth(string login, string password)
+        {
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+                return false;
+
+            var user = Core.Context.Users
+                .FirstOrDefault(u => u.Login == login && u.Password == password);
+
+            if (user == null)
+                return false;
+
+            Core.CurrentUser = user;
+            return true;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -30,32 +36,57 @@ namespace PR14.Pages
             string login = LoginBox.Text.Trim();
             string password = PasswordBox.Password.Trim();
 
-            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            if (!Auth(login, password))
             {
-                MessageBox.Show("Введите логин и пароль.");
-                return;
-            }
+                failedAttempts++;
 
-            var user = Core.Context.Users
-                .FirstOrDefault(u => u.Login == login && u.Password == password);
-
-            if (user == null)
-            {
                 MessageBox.Show("Неверный логин или пароль.");
+
+                // ===== КАПЧА (ЗАКОММЕНТИРОВАНО) =====
+                /*
+                if (failedAttempts >= 3)
+                {
+                    string captcha = GenerateCaptcha();
+                    MessageBox.Show($"Введите капчу: {captcha}");
+
+                    // тут должен быть ввод капчи пользователем (например через TextBox)
+                    string userInput = ""; // сюда подставить ввод
+
+                    if (userInput != captcha)
+                    {
+                        MessageBox.Show("Неверная капча.");
+                        return;
+                    }
+                }
+                */
+                // ===================================
+
                 return;
             }
 
-            Core.CurrentUser = user;
+            failedAttempts = 0;
 
             MessageBox.Show("Вы успешно вошли.");
-
             NavigationService.Navigate(new MainPage());
         }
+
+        // ===== КАПЧА (ЗАКОММЕНТИРОВАНО) =====
+        /*
+        private string GenerateCaptcha()
+        {
+            var rand = new Random();
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ123456789";
+            return new string(Enumerable.Repeat(chars, 5)
+                .Select(s => s[rand.Next(s.Length)]).ToArray());
+        }
+        */
+        // ===================================
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RegisterPage());
         }
+
         private void Main_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MainPage());
