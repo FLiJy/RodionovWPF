@@ -1,42 +1,16 @@
-﻿using pr16;
-using pr16.Model;
-using pr16.Services;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using pr16.Services;
 
 namespace pr16.Views
 {
     public partial class GamePage : Page
     {
         private GameManager game;
-        using System.Windows.Media.Imaging;
 
-    BitmapImage GetEnemyImage()
-        {
-            string path = "pack://application:,,,/Resources/Images/";
-
-            if (game.CurrentEnemy == null)
-                return new BitmapImage(new Uri(path + "chest.png"));
-
-            string name = game.CurrentEnemy.Name.ToLower();
-
-            if (name.Contains("гоблин"))
-                return new BitmapImage(new Uri(path + "goblin.png"));
-
-            if (name.Contains("скелет"))
-                return new BitmapImage(new Uri(path + "skeleton.png"));
-
-            if (name.Contains("маг"))
-                return new BitmapImage(new Uri(path + "mage.png"));
-
-            if (name.Contains("слиз"))
-                return new BitmapImage(new Uri(path + "slime.png"));
-
-            return new BitmapImage(new Uri(path + "chest.png"));
-        }
-    public GamePage(GameManager gm)
+        public GamePage(GameManager gm)
         {
             InitializeComponent();
             game = gm;
@@ -50,7 +24,6 @@ namespace pr16.Views
             };
 
             UpdateUI();
-           
         }
 
         void UpdateUI()
@@ -59,16 +32,17 @@ namespace pr16.Views
 
             PlayerHP.Maximum = game.Player.MaxHP;
             PlayerHP.Value = game.Player.HP;
-
             PlayerHPText.Text = $"{game.Player.HP} / {game.Player.MaxHP}";
 
-            WeaponText.Text = "Оружие: " + game.Player.Weapon.Name + ' ' + game.Player.Weapon.AttackBonus +  " Урона";
-            ArmorText.Text = "Броня: " + game.Player.Armor.Name + ' ' + game.Player.Armor.DefenseBonus +  " Защиты";
+            WeaponText.Text = "Оружие: " + game.Player.Weapon.Name;
+            ArmorText.Text = "Броня: " + game.Player.Armor.Name;
 
             if (game.IsChoosingItem)
             {
                 BattlePanel.Visibility = Visibility.Collapsed;
                 ItemPanel.Visibility = Visibility.Visible;
+
+                EnemyImage.Source = GetImage("chest.png");
 
                 if (game.PendingWeapon != null)
                 {
@@ -80,60 +54,62 @@ namespace pr16.Views
                     ItemName.Text = game.PendingArmor.Name;
                     ItemStats.Text = $"+{game.PendingArmor.DefenseBonus} защиты";
                 }
+
+                return;
+            }
+
+            BattlePanel.Visibility = Visibility.Visible;
+            ItemPanel.Visibility = Visibility.Collapsed;
+
+            if (game.CurrentEnemy != null)
+            {
+                EnemyText.Text = game.CurrentEnemy.Name;
+
+                EnemyHP.Maximum = game.CurrentEnemy.MaxHP;
+                EnemyHP.Value = game.CurrentEnemy.HP;
+                EnemyHPText.Text = $"{game.CurrentEnemy.HP} / {game.CurrentEnemy.MaxHP}";
+
+                EnemyImage.Source = GetEnemyImage(game.CurrentEnemy.Name);
             }
             else
             {
-                BattlePanel.Visibility = Visibility.Visible;
-                ItemPanel.Visibility = Visibility.Collapsed;
-
-                if (game.CurrentEnemy != null)
-                {
-                    EnemyText.Text = game.CurrentEnemy.Name;
-
-                    EnemyHP.Maximum = game.CurrentEnemy.MaxHP;
-                    EnemyHP.Value = game.CurrentEnemy.HP;
-
-                    EnemyHPText.Text = $"{game.CurrentEnemy.HP} / {game.CurrentEnemy.MaxHP}";
-                }
-                else
-                {
-                    EnemyText.Text = "Сундук";
-                    EnemyHP.Value = 0;
-                    EnemyHPText.Text = "";
-                   
-                }
+                EnemyText.Text = "Сундук";
+                EnemyHP.Value = 0;
+                EnemyHPText.Text = "";
+                EnemyImage.Source = GetImage("chest.png");
             }
 
             if (!game.Player.IsAlive)
                 MainWindow.Instance.Navigate(new GameOver());
         }
-            BitmapImage GetEnemyImage(string name)
-            {
-                name = name.ToLower();
 
-                
-                if (name.Contains("гоблин"))
-                    return GetImage("goblin.png");
+        BitmapImage GetEnemyImage(string name)
+        {
+            name = name.ToLower();
 
-                if (name.Contains("скелет"))
-                    return GetImage("skelet.png");
+            if (name.Contains("гоблин"))
+                return GetImage("goblin.png");
 
-                if (name.Contains("маг"))
-                    return GetImage("mage.png");
+            if (name.Contains("скелет"))
+                return GetImage("skelet.png");
 
-                if (name.Contains("слизень"))
-                    return GetImage("slime.png");
+            if (name.Contains("маг"))
+                return GetImage("mage.png");
 
-                return GetImage("chest.png");
-            }
+            if (name.Contains("слизень"))
+                return GetImage("slime.png");
 
-            BitmapImage GetImage(string fileName)
-            {
-                return new BitmapImage(new Uri(
-                    $"pack://application:,,,/Resources/Images/{fileName}",
-                    UriKind.Absolute));
-            }
-    private void Attack_Click(object sender, RoutedEventArgs e)
+            return GetImage("chest.png");
+        }
+
+        BitmapImage GetImage(string fileName)
+        {
+            return new BitmapImage(new Uri(
+                $"pack://application:,,,/Images/{fileName}",
+                UriKind.Absolute));
+        }
+
+        private void Attack_Click(object sender, RoutedEventArgs e)
         {
             game.Attack();
             UpdateUI();
@@ -156,6 +132,5 @@ namespace pr16.Views
             game.SkipItem();
             UpdateUI();
         }
-
     }
 }

@@ -50,7 +50,7 @@ namespace pr16.Model
 
             switch (type)
             {
-                case 0: // Босс-гоблин
+                case 0: 
                     return new Enemy(
                         "ВВГ (босс-гоблин)",
                         (int)(50 * 2.0),
@@ -59,7 +59,7 @@ namespace pr16.Model
                         critChance: 30 
                     );
 
-                case 1: // Босс-скелет
+                case 1: 
                     return new Enemy(
                         "Ковальский (босс-скелет)",
                         (int)(60 * 2.5),
@@ -68,7 +68,7 @@ namespace pr16.Model
                         ignoreArmor: true
                     );
 
-                case 2: // Босс-маг
+                case 2: 
                     return new Enemy(
                         "Архимаг C++",
                         (int)(40 * 1.8),
