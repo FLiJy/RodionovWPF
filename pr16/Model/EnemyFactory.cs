@@ -56,7 +56,7 @@ namespace pr16.Model
                         (int)(50 * 2.0),
                         (int)(10 * 1.5),
                         (int)(3 * 1.2),
-                        critChance: 30 // +10%
+                        critChance: 30 
                     );
 
                 case 1: // Босс-скелет
@@ -74,7 +74,7 @@ namespace pr16.Model
                         (int)(40 * 1.8),
                         (int)(9 * 1.6),
                         (int)(2 * 1.1),
-                        freezeChance: 30 // +10%
+                        freezeChance: 30 
                     );
 
                 default:

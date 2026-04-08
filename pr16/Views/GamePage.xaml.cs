@@ -1,6 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using pr16;
+using pr16.Model;
 using pr16.Services;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace pr16.Views
 {
@@ -22,6 +24,7 @@ namespace pr16.Views
             };
 
             UpdateUI();
+           
         }
 
         void UpdateUI()
@@ -33,8 +36,8 @@ namespace pr16.Views
 
             PlayerHPText.Text = $"{game.Player.HP} / {game.Player.MaxHP}";
 
-            WeaponText.Text = "Оружие: " + game.Player.Weapon.Name;
-            ArmorText.Text = "Броня: " + game.Player.Armor.Name;
+            WeaponText.Text = "Оружие: " + game.Player.Weapon.Name + ' ' + game.Player.Weapon.AttackBonus +  " Урона";
+            ArmorText.Text = "Броня: " + game.Player.Armor.Name + ' ' + game.Player.Armor.DefenseBonus +  " Защиты";
 
             if (game.IsChoosingItem)
             {
@@ -71,6 +74,7 @@ namespace pr16.Views
                     EnemyText.Text = "Сундук";
                     EnemyHP.Value = 0;
                     EnemyHPText.Text = "";
+                   
                 }
             }
 
@@ -101,5 +105,6 @@ namespace pr16.Views
             game.SkipItem();
             UpdateUI();
         }
+
     }
 }

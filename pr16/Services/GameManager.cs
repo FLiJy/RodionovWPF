@@ -11,9 +11,7 @@ namespace pr16.Services
         public Player Player;
         public Enemy CurrentEnemy;
         public int Turn;
-
         public bool PlayerFrozen = false;
-
         public bool IsChoosingItem = false;
         public Weapon PendingWeapon;
         public Armor PendingArmor;
@@ -25,7 +23,7 @@ namespace pr16.Services
             Player = new Player("Игрок");
             Turn = 1;
             Logs.Clear();
-            Logs.Add("Игра началась!");
+            Logs.Add("Игра началась");
 
             NextTurn(); 
         }
@@ -58,7 +56,7 @@ namespace pr16.Services
 
             if (PlayerFrozen)
             {
-                Logs.Add("Вы заморожены и пропускаете ход!");
+                Logs.Add("Вы заморожены и пропускаете ход");
                 PlayerFrozen = false;
                 EnemyTurn();
                 return;
@@ -76,7 +74,7 @@ namespace pr16.Services
 
             if (PlayerFrozen)
             {
-                Logs.Add("Вы заморожены и пропускаете ход!");
+                Logs.Add("Вы заморожены и пропускаете ход");
                 PlayerFrozen = false;
                 EnemyTurn();
                 return;
@@ -92,7 +90,7 @@ namespace pr16.Services
         {
             if (!CurrentEnemy.IsAlive)
             {
-                Logs.Add($"Враг {CurrentEnemy.Name} убит!");
+                Logs.Add($"Враг {CurrentEnemy.Name} убит");
                 Turn++;
                 NextTurn(); 
                 return;
@@ -107,17 +105,17 @@ namespace pr16.Services
             if (damage > 0)
                 Logs.Add($"Враг нанес {damage} урона");
             else
-                Logs.Add("Вы избежали урона!");
+                Logs.Add("Вы избежали урон");
 
             if (froze)
             {
-                Logs.Add("Вы заморожены!");
+                Logs.Add("Вы заморожены");
                 PlayerFrozen = true;
             }
 
             if (!Player.IsAlive)
             {
-                Logs.Add("Вы умерли!");
+                Logs.Add("Вы умерли :(");
                 return;
             }
         }
@@ -126,14 +124,14 @@ namespace pr16.Services
         {
             CurrentEnemy = null; 
 
-            Logs.Add("Вы нашли сундук!");
+            Logs.Add("Вы нашли сундук");
 
             int drop = GameRandom.rnd.Next(3);
 
             if (drop == 0)
             {
                 Player.HP = Player.MaxHP;
-                Logs.Add("Вы полностью восстановили HP!");
+                Logs.Add("Вы полностью восстановили здоровье");
                 Turn++;
                 NextTurn();
             }

@@ -43,7 +43,7 @@ namespace pr16.Model
                 if (dodge < 40)
                 {
                     Defending = false;
-                    return false; // уклон
+                    return false;
                 }
 
                 int blockPercent = rnd.Next(70, 101);
@@ -55,7 +55,7 @@ namespace pr16.Model
             HP -= damage;
             if (HP < 0) HP = 0;
 
-            return true; // урон прошёл
+            return true;
         }
     }
 }

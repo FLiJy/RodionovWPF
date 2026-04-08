@@ -9,7 +9,7 @@
                        FontSize="40"
                        Margin="0,0,0,20"/>
 
-            <Button Content="Начать заново"
+            <Button Content="Нажмите чтобв начать заново"
                     Width="200"
                     Height="50"
                     Click="Restart_Click"/>

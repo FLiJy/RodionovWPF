@@ -35,60 +35,52 @@ namespace pr16.Model
             int damage = Attack;
             bool froze = false;
 
-            // КРИТ
             if (CritChance > 0 && rnd.Next(100) < CritChance)
             {
                 damage *= 2;
-                log("Критический удар!");
+                log("Критический удар");
             }
 
-            // УРОН ДО ЗАЩИТЫ
             int finalDamage = damage;
 
-            // ЗАЩИТА игрока
             if (player.Defending)
             {
                 int dodge = rnd.Next(100);
 
-                // уклонение
                 if (dodge < 40)
                 {
-                    log("Вы увернулись!");
+                    log("Вы увернулись");
                     player.Defending = false;
                     return false;
                 }
 
-                // ❗ СКЕЛЕТ — игнорирует всё
                 if (!IgnoreArmor)
                 {
                     int blockPercent = rnd.Next(70, 101);
                     finalDamage = finalDamage * (100 - blockPercent) / 100;
 
-                    // броня
                     finalDamage -= player.Armor.DefenseBonus;
                 }
                 else
                 {
-                    log("Скелет игнорирует защиту!");
+                    log("Скелет игнорирует защиту");
                 }
 
                 player.Defending = false;
             }
             else
             {
-                // если НЕ защищается → обычный урон
-
+                
                 if (!IgnoreArmor)
                     finalDamage -= player.Armor.DefenseBonus;
             }
 
             if (finalDamage < 0) finalDamage = 0;
 
-            // ЗАМОРОЗКА
             if (FreezeChance > 0 && rnd.Next(100) < FreezeChance)
             {
                 froze = true;
-                log("Вы заморожены!");
+                log("Вы заморожены");
             }
 
             player.TakeDamage(finalDamage);
