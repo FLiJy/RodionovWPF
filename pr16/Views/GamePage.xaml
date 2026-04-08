@@ -36,11 +36,11 @@
             <Grid>
 
                 <StackPanel x:Name="BattlePanel" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Image x:Name="EnemyImage" 
-                           Width="150" 
-                           Height="150" 
-                           Stretch="Uniform" 
-                           Margin="0,0,0,10" />         
+                    <Image x:Name="EnemyImage"
+                       Width="120"
+                       Height="120"
+                       Margin="0,0,0,10"/>      
+
                     <TextBlock x:Name="EnemyText" FontSize="32" Margin="0,0,0,10" HorizontalAlignment="Center" TextAlignment="Center"  />
 
                     <TextBlock Text="Здоровье врага" HorizontalAlignment="Center"/>

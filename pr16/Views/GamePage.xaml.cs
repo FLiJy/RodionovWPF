@@ -1,16 +1,42 @@
 ﻿using pr16;
 using pr16.Model;
 using pr16.Services;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace pr16.Views
 {
     public partial class GamePage : Page
     {
         private GameManager game;
+        using System.Windows.Media.Imaging;
 
-        public GamePage(GameManager gm)
+    BitmapImage GetEnemyImage()
+        {
+            string path = "pack://application:,,,/Resources/Images/";
+
+            if (game.CurrentEnemy == null)
+                return new BitmapImage(new Uri(path + "chest.png"));
+
+            string name = game.CurrentEnemy.Name.ToLower();
+
+            if (name.Contains("гоблин"))
+                return new BitmapImage(new Uri(path + "goblin.png"));
+
+            if (name.Contains("скелет"))
+                return new BitmapImage(new Uri(path + "skeleton.png"));
+
+            if (name.Contains("маг"))
+                return new BitmapImage(new Uri(path + "mage.png"));
+
+            if (name.Contains("слиз"))
+                return new BitmapImage(new Uri(path + "slime.png"));
+
+            return new BitmapImage(new Uri(path + "chest.png"));
+        }
+    public GamePage(GameManager gm)
         {
             InitializeComponent();
             game = gm;
@@ -81,8 +107,33 @@ namespace pr16.Views
             if (!game.Player.IsAlive)
                 MainWindow.Instance.Navigate(new GameOver());
         }
+            BitmapImage GetEnemyImage(string name)
+            {
+                name = name.ToLower();
 
-        private void Attack_Click(object sender, RoutedEventArgs e)
+                
+                if (name.Contains("гоблин"))
+                    return GetImage("goblin.png");
+
+                if (name.Contains("скелет"))
+                    return GetImage("skelet.png");
+
+                if (name.Contains("маг"))
+                    return GetImage("mage.png");
+
+                if (name.Contains("слизень"))
+                    return GetImage("slime.png");
+
+                return GetImage("chest.png");
+            }
+
+            BitmapImage GetImage(string fileName)
+            {
+                return new BitmapImage(new Uri(
+                    $"pack://application:,,,/Resources/Images/{fileName}",
+                    UriKind.Absolute));
+            }
+    private void Attack_Click(object sender, RoutedEventArgs e)
         {
             game.Attack();
             UpdateUI();
