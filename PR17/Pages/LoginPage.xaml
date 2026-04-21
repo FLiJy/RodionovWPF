@@ -1,0 +1,18 @@
+﻿<Page x:Class="PR17.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Login">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250">
+            <TextBlock Text="Логин"/>
+            <TextBox x:Name="LoginBox"/>
+
+            <TextBlock Text="Пароль"/>
+            <PasswordBox x:Name="PasswordBox"/>
+
+            <Button Content="Войти" Click="Login_Click" Margin="0,10"/>
+            <Button Content="Назад" Click="Back_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
